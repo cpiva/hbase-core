@@ -12,18 +12,18 @@
     {
       "name": "created",
       "type": "long",
-      "mapping": { "type": "column", "value": "meta:creationDate" }
+      "mapping": { "type": "column", "value": "meta:created" }
     },
     {
       "name": "description",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:favoriteColor" }
+      "mapping": { "type": "column", "value": "meta:description" }
     },
     {
       "name": "type",
       "type": "int",
       "default": 0,
-      "mapping": { "type": "column", "value": "meta:age" }
+      "mapping": { "type": "column", "value": "meta:type" }
     }
   ]
 }
