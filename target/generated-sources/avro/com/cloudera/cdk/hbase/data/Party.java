@@ -8,12 +8,17 @@ package com.cloudera.cdk.hbase.data;
 /** A party record */
 @org.apache.avro.specific.AvroGenerated
 public class Party extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Party\",\"namespace\":\"com.cloudera.cdk.hbase.data\",\"doc\":\"A party record\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"mapping\":{\"type\":\"key\",\"value\":\"0\"}},{\"name\":\"created\",\"type\":\"long\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:creationDate\"}},{\"name\":\"description\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:favoriteColor\"}},{\"name\":\"type\",\"type\":\"int\",\"default\":0,\"mapping\":{\"type\":\"column\",\"value\":\"meta:age\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Party\",\"namespace\":\"com.cloudera.cdk.hbase.data\",\"doc\":\"A party record\",\"fields\":[{\"name\":\"id\",\"type\":\"string\",\"mapping\":{\"type\":\"key\",\"value\":\"0\"}},{\"name\":\"desc\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:desc\"}},{\"name\":\"type\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:type\"}},{\"name\":\"start_dttm\",\"type\":\"long\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:start_dttm\"}},{\"name\":\"end_dttm\",\"type\":\"long\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:end_dttm\"}},{\"name\":\"status_code\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:status_code\"}},{\"name\":\"status_desc\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:status_desc\"}},{\"name\":\"language_code\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:language_code\"}},{\"name\":\"event_id\",\"type\":\"string\",\"mapping\":{\"type\":\"column\",\"value\":\"meta:event_id\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
    private java.lang.CharSequence id;
-   private long created;
-   private java.lang.CharSequence description;
-   private int type;
+   private java.lang.CharSequence desc;
+   private java.lang.CharSequence type;
+   private long start_dttm;
+   private long end_dttm;
+   private java.lang.CharSequence status_code;
+   private java.lang.CharSequence status_desc;
+   private java.lang.CharSequence language_code;
+   private java.lang.CharSequence event_id;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -25,11 +30,16 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * All-args constructor.
    */
-  public Party(java.lang.CharSequence id, java.lang.Long created, java.lang.CharSequence description, java.lang.Integer type) {
+  public Party(java.lang.CharSequence id, java.lang.CharSequence desc, java.lang.CharSequence type, java.lang.Long start_dttm, java.lang.Long end_dttm, java.lang.CharSequence status_code, java.lang.CharSequence status_desc, java.lang.CharSequence language_code, java.lang.CharSequence event_id) {
     this.id = id;
-    this.created = created;
-    this.description = description;
+    this.desc = desc;
     this.type = type;
+    this.start_dttm = start_dttm;
+    this.end_dttm = end_dttm;
+    this.status_code = status_code;
+    this.status_desc = status_desc;
+    this.language_code = language_code;
+    this.event_id = event_id;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -37,9 +47,14 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return created;
-    case 2: return description;
-    case 3: return type;
+    case 1: return desc;
+    case 2: return type;
+    case 3: return start_dttm;
+    case 4: return end_dttm;
+    case 5: return status_code;
+    case 6: return status_desc;
+    case 7: return language_code;
+    case 8: return event_id;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -48,9 +63,14 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.lang.CharSequence)value$; break;
-    case 1: created = (java.lang.Long)value$; break;
-    case 2: description = (java.lang.CharSequence)value$; break;
-    case 3: type = (java.lang.Integer)value$; break;
+    case 1: desc = (java.lang.CharSequence)value$; break;
+    case 2: type = (java.lang.CharSequence)value$; break;
+    case 3: start_dttm = (java.lang.Long)value$; break;
+    case 4: end_dttm = (java.lang.Long)value$; break;
+    case 5: status_code = (java.lang.CharSequence)value$; break;
+    case 6: status_desc = (java.lang.CharSequence)value$; break;
+    case 7: language_code = (java.lang.CharSequence)value$; break;
+    case 8: event_id = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -64,26 +84,66 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
 
 
   /**
-   * Gets the value of the 'created' field.
+   * Gets the value of the 'desc' field.
    */
-  public java.lang.Long getCreated() {
-    return created;
-  }
-
-
-  /**
-   * Gets the value of the 'description' field.
-   */
-  public java.lang.CharSequence getDescription() {
-    return description;
+  public java.lang.CharSequence getDesc() {
+    return desc;
   }
 
 
   /**
    * Gets the value of the 'type' field.
    */
-  public java.lang.Integer getType() {
+  public java.lang.CharSequence getType() {
     return type;
+  }
+
+
+  /**
+   * Gets the value of the 'start_dttm' field.
+   */
+  public java.lang.Long getStartDttm() {
+    return start_dttm;
+  }
+
+
+  /**
+   * Gets the value of the 'end_dttm' field.
+   */
+  public java.lang.Long getEndDttm() {
+    return end_dttm;
+  }
+
+
+  /**
+   * Gets the value of the 'status_code' field.
+   */
+  public java.lang.CharSequence getStatusCode() {
+    return status_code;
+  }
+
+
+  /**
+   * Gets the value of the 'status_desc' field.
+   */
+  public java.lang.CharSequence getStatusDesc() {
+    return status_desc;
+  }
+
+
+  /**
+   * Gets the value of the 'language_code' field.
+   */
+  public java.lang.CharSequence getLanguageCode() {
+    return language_code;
+  }
+
+
+  /**
+   * Gets the value of the 'event_id' field.
+   */
+  public java.lang.CharSequence getEventId() {
+    return event_id;
   }
 
 
@@ -109,9 +169,14 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
     implements org.apache.avro.data.RecordBuilder<Party> {
 
     private java.lang.CharSequence id;
-    private long created;
-    private java.lang.CharSequence description;
-    private int type;
+    private java.lang.CharSequence desc;
+    private java.lang.CharSequence type;
+    private long start_dttm;
+    private long end_dttm;
+    private java.lang.CharSequence status_code;
+    private java.lang.CharSequence status_desc;
+    private java.lang.CharSequence language_code;
+    private java.lang.CharSequence event_id;
 
     /** Creates a new Builder */
     private Builder() {
@@ -125,17 +190,37 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.created)) {
-        this.created = data().deepCopy(fields()[1].schema(), other.created);
+      if (isValidValue(fields()[1], other.desc)) {
+        this.desc = data().deepCopy(fields()[1].schema(), other.desc);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.description)) {
-        this.description = data().deepCopy(fields()[2].schema(), other.description);
+      if (isValidValue(fields()[2], other.type)) {
+        this.type = data().deepCopy(fields()[2].schema(), other.type);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.type)) {
-        this.type = data().deepCopy(fields()[3].schema(), other.type);
+      if (isValidValue(fields()[3], other.start_dttm)) {
+        this.start_dttm = data().deepCopy(fields()[3].schema(), other.start_dttm);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.end_dttm)) {
+        this.end_dttm = data().deepCopy(fields()[4].schema(), other.end_dttm);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.status_code)) {
+        this.status_code = data().deepCopy(fields()[5].schema(), other.status_code);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.status_desc)) {
+        this.status_desc = data().deepCopy(fields()[6].schema(), other.status_desc);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.language_code)) {
+        this.language_code = data().deepCopy(fields()[7].schema(), other.language_code);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.event_id)) {
+        this.event_id = data().deepCopy(fields()[8].schema(), other.event_id);
+        fieldSetFlags()[8] = true;
       }
     }
     
@@ -146,17 +231,37 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.created)) {
-        this.created = data().deepCopy(fields()[1].schema(), other.created);
+      if (isValidValue(fields()[1], other.desc)) {
+        this.desc = data().deepCopy(fields()[1].schema(), other.desc);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.description)) {
-        this.description = data().deepCopy(fields()[2].schema(), other.description);
+      if (isValidValue(fields()[2], other.type)) {
+        this.type = data().deepCopy(fields()[2].schema(), other.type);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.type)) {
-        this.type = data().deepCopy(fields()[3].schema(), other.type);
+      if (isValidValue(fields()[3], other.start_dttm)) {
+        this.start_dttm = data().deepCopy(fields()[3].schema(), other.start_dttm);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.end_dttm)) {
+        this.end_dttm = data().deepCopy(fields()[4].schema(), other.end_dttm);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.status_code)) {
+        this.status_code = data().deepCopy(fields()[5].schema(), other.status_code);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.status_desc)) {
+        this.status_desc = data().deepCopy(fields()[6].schema(), other.status_desc);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.language_code)) {
+        this.language_code = data().deepCopy(fields()[7].schema(), other.language_code);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.event_id)) {
+        this.event_id = data().deepCopy(fields()[8].schema(), other.event_id);
+        fieldSetFlags()[8] = true;
       }
     }
 
@@ -185,76 +290,201 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
       return this;
     }
 
-    /** Gets the value of the 'created' field */
-    public java.lang.Long getCreated() {
-      return created;
+    /** Gets the value of the 'desc' field */
+    public java.lang.CharSequence getDesc() {
+      return desc;
     }
     
-    /** Sets the value of the 'created' field */
-    public com.cloudera.cdk.hbase.data.Party.Builder setCreated(long value) {
+    /** Sets the value of the 'desc' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setDesc(java.lang.CharSequence value) {
       validate(fields()[1], value);
-      this.created = value;
+      this.desc = value;
       fieldSetFlags()[1] = true;
       return this; 
     }
     
-    /** Checks whether the 'created' field has been set */
-    public boolean hasCreated() {
+    /** Checks whether the 'desc' field has been set */
+    public boolean hasDesc() {
       return fieldSetFlags()[1];
     }
     
-    /** Clears the value of the 'created' field */
-    public com.cloudera.cdk.hbase.data.Party.Builder clearCreated() {
+    /** Clears the value of the 'desc' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearDesc() {
+      desc = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
-    /** Gets the value of the 'description' field */
-    public java.lang.CharSequence getDescription() {
-      return description;
-    }
-    
-    /** Sets the value of the 'description' field */
-    public com.cloudera.cdk.hbase.data.Party.Builder setDescription(java.lang.CharSequence value) {
-      validate(fields()[2], value);
-      this.description = value;
-      fieldSetFlags()[2] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'description' field has been set */
-    public boolean hasDescription() {
-      return fieldSetFlags()[2];
-    }
-    
-    /** Clears the value of the 'description' field */
-    public com.cloudera.cdk.hbase.data.Party.Builder clearDescription() {
-      description = null;
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
     /** Gets the value of the 'type' field */
-    public java.lang.Integer getType() {
+    public java.lang.CharSequence getType() {
       return type;
     }
     
     /** Sets the value of the 'type' field */
-    public com.cloudera.cdk.hbase.data.Party.Builder setType(int value) {
-      validate(fields()[3], value);
+    public com.cloudera.cdk.hbase.data.Party.Builder setType(java.lang.CharSequence value) {
+      validate(fields()[2], value);
       this.type = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'type' field has been set */
     public boolean hasType() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'type' field */
     public com.cloudera.cdk.hbase.data.Party.Builder clearType() {
+      type = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'start_dttm' field */
+    public java.lang.Long getStartDttm() {
+      return start_dttm;
+    }
+    
+    /** Sets the value of the 'start_dttm' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setStartDttm(long value) {
+      validate(fields()[3], value);
+      this.start_dttm = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'start_dttm' field has been set */
+    public boolean hasStartDttm() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'start_dttm' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearStartDttm() {
       fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'end_dttm' field */
+    public java.lang.Long getEndDttm() {
+      return end_dttm;
+    }
+    
+    /** Sets the value of the 'end_dttm' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setEndDttm(long value) {
+      validate(fields()[4], value);
+      this.end_dttm = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'end_dttm' field has been set */
+    public boolean hasEndDttm() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'end_dttm' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearEndDttm() {
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'status_code' field */
+    public java.lang.CharSequence getStatusCode() {
+      return status_code;
+    }
+    
+    /** Sets the value of the 'status_code' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setStatusCode(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.status_code = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'status_code' field has been set */
+    public boolean hasStatusCode() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'status_code' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearStatusCode() {
+      status_code = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'status_desc' field */
+    public java.lang.CharSequence getStatusDesc() {
+      return status_desc;
+    }
+    
+    /** Sets the value of the 'status_desc' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setStatusDesc(java.lang.CharSequence value) {
+      validate(fields()[6], value);
+      this.status_desc = value;
+      fieldSetFlags()[6] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'status_desc' field has been set */
+    public boolean hasStatusDesc() {
+      return fieldSetFlags()[6];
+    }
+    
+    /** Clears the value of the 'status_desc' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearStatusDesc() {
+      status_desc = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'language_code' field */
+    public java.lang.CharSequence getLanguageCode() {
+      return language_code;
+    }
+    
+    /** Sets the value of the 'language_code' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setLanguageCode(java.lang.CharSequence value) {
+      validate(fields()[7], value);
+      this.language_code = value;
+      fieldSetFlags()[7] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'language_code' field has been set */
+    public boolean hasLanguageCode() {
+      return fieldSetFlags()[7];
+    }
+    
+    /** Clears the value of the 'language_code' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearLanguageCode() {
+      language_code = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'event_id' field */
+    public java.lang.CharSequence getEventId() {
+      return event_id;
+    }
+    
+    /** Sets the value of the 'event_id' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder setEventId(java.lang.CharSequence value) {
+      validate(fields()[8], value);
+      this.event_id = value;
+      fieldSetFlags()[8] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'event_id' field has been set */
+    public boolean hasEventId() {
+      return fieldSetFlags()[8];
+    }
+    
+    /** Clears the value of the 'event_id' field */
+    public com.cloudera.cdk.hbase.data.Party.Builder clearEventId() {
+      event_id = null;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -263,9 +493,14 @@ public class Party extends org.apache.avro.specific.SpecificRecordBase implement
       try {
         Party record = new Party();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.created = fieldSetFlags()[1] ? this.created : (java.lang.Long) defaultValue(fields()[1]);
-        record.description = fieldSetFlags()[2] ? this.description : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.type = fieldSetFlags()[3] ? this.type : (java.lang.Integer) defaultValue(fields()[3]);
+        record.desc = fieldSetFlags()[1] ? this.desc : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.type = fieldSetFlags()[2] ? this.type : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.start_dttm = fieldSetFlags()[3] ? this.start_dttm : (java.lang.Long) defaultValue(fields()[3]);
+        record.end_dttm = fieldSetFlags()[4] ? this.end_dttm : (java.lang.Long) defaultValue(fields()[4]);
+        record.status_code = fieldSetFlags()[5] ? this.status_code : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.status_desc = fieldSetFlags()[6] ? this.status_desc : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.language_code = fieldSetFlags()[7] ? this.language_code : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.event_id = fieldSetFlags()[8] ? this.event_id : (java.lang.CharSequence) defaultValue(fields()[8]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

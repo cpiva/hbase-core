@@ -15,6 +15,7 @@
  */
 package com.cloudera.cdk.hbase.data;
 
+import java.util.Date;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
@@ -38,19 +39,31 @@ public class WritePartyDataset extends Configured implements Tool {
     RandomAccessDataset<Party> parties = repo.load("parties");
 
     // Get an accessor for the dataset and write some parties to it
-    parties.put(party("1", "aaa"));
-    parties.put(party("2", "bbb"));
-    parties.put(party("3", "ccc"));
-    parties.put(party("4", "ddd"));
+    long x = System.currentTimeMillis();
+
+    parties.put(party("1", "desc1","type1",x,x,"status_code1","status_desc1","lang1","1"));
+    parties.put(party("2", "desc2","type2",x,x,"status_code2","status_desc2","lang2","2"));
+    parties.put(party("3", "desc3","type3",x,x,"status_code3","status_desc3","lang3","3"));
+    parties.put(party("4", "desc4","type4",x,x,"status_code4","status_desc4","lang4","4"));
+    parties.put(party("5", "desc5","type5",x,x,"status_code5","status_desc5","lang5","5"));
 
     return 0;
   }
 
-  private static Party party(String id, String description) {
+  private static Party party(String id, String desc, String type, 
+                             long startDttm, long endDttm, 
+                             String statusCode, String statusDesc, 
+                             String languageCode, String eventId) {
     return Party.newBuilder()
         .setId(id)
-        .setDescription(description)
-        .setCreated(System.currentTimeMillis())
+        .setDesc(desc)
+        .setType(type)
+        .setStartDttm(startDttm)
+        .setEndDttm(endDttm)
+        .setStatusCode(statusCode)
+        .setStatusDesc(statusDesc)
+        .setLanguageCode(languageCode)
+        .setEventId(eventId)
         .build();
   }
 

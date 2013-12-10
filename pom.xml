@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.cloudera.cdk.hbase</groupId>
-  <artifactId>dataset-hbase</artifactId>
+  <artifactId>hbase-core</artifactId>
   <version>0.9.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 

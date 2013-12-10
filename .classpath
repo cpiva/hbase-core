@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/cloudera/workspace/cdk/cdk-data/cdk-data-core/target/cdk-data-core-0.9.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/home/cloudera/workspace/cdk/cdk-data/cdk-data-core/target/cdk-data-core-0.9.1-SNAPSHOT-sources.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-data-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-data-hbase"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-data-hcatalog"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-maven-plugin"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-avro"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-hadoop-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-hadoop-sequencefile"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-json"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-metrics-servlets"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-saxon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-solr-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdk-morphlines-twitter"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/training"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
