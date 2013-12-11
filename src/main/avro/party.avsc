@@ -2,7 +2,7 @@
   "type": "record",
   "name": "Party",
   "namespace": "com.cloudera.cdk.hbase.data",
-  "doc": "A party record",
+  "doc": "party record",
   "fields": [
     {
       "name": "id",

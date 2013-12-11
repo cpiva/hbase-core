@@ -5,22 +5,23 @@ clone, compile and install the Cloudera CDK using:
 
 git clone https://github.com/cloudera/cdk.git
 
-mvn compile -Dmaven.test.skip=true
-
-mvn install
+mvn install -Dmaven.test.skip=true
 
 then on hbase-core run the following:
 
 mvn compile -Dmaven.test.skip=true
 
-mvn cdk:delete-dataset (optional)
+sh delete-dataset.sh (optional)
 
-mvn cdk:create-dataset
+sh create-dataset.sh
 
 mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WritePartyDataset"
 
 mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadPartyDataset"
 
+mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WriteEventDataset"
+
+mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadEventDataset"
 
 
  

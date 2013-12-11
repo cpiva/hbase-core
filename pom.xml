@@ -71,11 +71,11 @@
         <groupId>com.cloudera.cdk</groupId>
         <artifactId>cdk-maven-plugin</artifactId>
         <version>${cdk-version}</version>
-        <configuration>
-          <repositoryUri>repo:hbase:localhost.localdomain</repositoryUri>
-          <datasetName>parties</datasetName>
-          <avroSchemaFile>src/main/avro/party.avsc</avroSchemaFile>
-        </configuration>
+          <!--<configuration>
+	    <repositoryUri>repo:hbase:localhost.localdomain</repositoryUri>
+            <datasetName>parties</datasetName>
+            <avroSchemaFile>src/main/avro/party.avsc</avroSchemaFile>
+          </configuration>-->
       </plugin>
     </plugins>
   </build>
