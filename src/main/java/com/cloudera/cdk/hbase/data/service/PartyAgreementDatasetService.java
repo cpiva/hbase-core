@@ -23,8 +23,8 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.PartyAddress;
 import com.cloudera.cdk.hbase.data.PartyAgreement;
+import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
@@ -55,9 +55,9 @@ public class PartyAgreementDatasetService {
     List<PartyAgreement> ls=new ArrayList<PartyAgreement>(); 
 
     // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-
+    //RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+    RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
+    
     // Load the party_address dataset
     RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 

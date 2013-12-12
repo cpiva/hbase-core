@@ -15,12 +15,12 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.Party;
+import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
@@ -31,8 +31,8 @@ public class PartyDatasetService {
   public Party get(String id) throws Exception {
 
     // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+	//RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+	RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
 
     // Load the parties dataset
     RandomAccessDataset<Party> parties = repo.load("party");

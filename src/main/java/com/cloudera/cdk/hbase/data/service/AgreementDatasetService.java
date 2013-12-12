@@ -20,6 +20,7 @@ import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.Agreement;
+import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
  * Read the agreement objects from the agreements dataset by key lookup, and by scanning.
@@ -30,8 +31,8 @@ public class AgreementDatasetService {
   public Agreement get(String id) throws Exception {
 
     // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+	//RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+	RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
 
     // Load the addresses dataset
     RandomAccessDataset<Agreement> agreements = repo.load("agreement");
