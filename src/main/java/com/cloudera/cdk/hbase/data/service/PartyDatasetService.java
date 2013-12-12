@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudera.cdk.hbase.data;
+package com.cloudera.cdk.hbase.data.service;
 
 import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.util.Tool;
-import org.apache.hadoop.util.ToolRunner;
+import com.cloudera.cdk.hbase.data.Party;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
  */
-public class ReadPartyDataset extends Configured implements Tool {
 
-  @Override
-  public int run(String[] args) throws Exception {
+public class PartyDatasetService {
+
+  public Party get(String id) throws Exception {
 
     // Construct an HBase dataset repository using the local HBase database
     RandomAccessDatasetRepository repo =
@@ -40,25 +38,32 @@ public class ReadPartyDataset extends Configured implements Tool {
     RandomAccessDataset<Party> parties = repo.load("parties");
 
     // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties).add("id", "1").build();
-    System.out.println(parties.get(key));
-    System.out.println(parties.get(key).getClass());
+    Key key = new Key.Builder(parties).add("id", id).build();
+    return parties.get(key);
+
+  }
+
+  public void list() throws Exception {
+
+    // Construct an HBase dataset repository using the local HBase database
+    RandomAccessDatasetRepository repo =
+        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+
+    // Load the parties dataset
+    RandomAccessDataset<Party> parties = repo.load("parties");
+
     // Get a reader for the dataset and read all the users
     DatasetReader<Party> reader = parties.newReader();
-    try {
-      reader.open();
-      for (Party party : reader) {
-        System.out.println(party);
-      }
-    } finally {
-      reader.close();
-    }
-
-    return 0;
+        try {
+          reader.open();
+          for (Party party : reader) {
+            System.out.println(party);
+          }
+        } finally {
+          reader.close();
+        }
+   
+    //return 0;
   }
 
-  public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadPartyDataset(), args);
-    System.exit(rc);
-  }
 }
