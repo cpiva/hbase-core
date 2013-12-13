@@ -41,8 +41,10 @@ public class ReadPartyDataset extends Configured implements Tool {
 
     // Get an accessor for the dataset and look up a party by id
     Key key = new Key.Builder(parties).add("id", "1").build();
+    Key key2 = new Key.Builder(parties).add("id", "9").build();
     System.out.println(parties.get(key));
-    System.out.println(parties.get(key).getClass());
+    System.out.println(parties.get(key2));
+    
     // Get a reader for the dataset and read all the users
     DatasetReader<Party> reader = parties.newReader();
     try {
