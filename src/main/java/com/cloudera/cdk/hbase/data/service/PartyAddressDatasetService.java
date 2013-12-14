@@ -15,12 +15,16 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+
 import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.Party;
+import com.cloudera.cdk.hbase.data.PartyAddress;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
@@ -35,16 +39,41 @@ public class PartyAddressDatasetService {
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
     // Load the parties dataset
-    RandomAccessDataset<Party> partyAddresses = repo.load("party_address");
+    RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
 
     // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties)
+    Key key = new Key.Builder(partyAddresses)
                     .add("party_id", party_id)
                     .add("address_id", address_id)
                     .build();
                     
     return partyAddresses.get(key);
 
+  }
+
+  public List<PartyAddress>  scan(String partyId) throws Exception {
+    List<PartyAddress> ls=new ArrayList<PartyAddress>(); 
+
+    // Construct an HBase dataset repository using the local HBase database
+    RandomAccessDatasetRepository repo =
+        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+
+    // Load the party_address dataset
+    RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
+
+    // Get a reader for the dataset and read all the users
+    DatasetReader<PartyAddress> reader = partyAddresses.newReader();
+    try {
+      reader.open();
+      for (PartyAddress partyAddress : reader) {
+        if(partyAddress.getPartyId().toString().equals(partyId)){
+          ls.add(partyAddress);
+        }
+      }
+    } finally {
+      reader.close();
+    }
+    return ls;
   }
 
 }

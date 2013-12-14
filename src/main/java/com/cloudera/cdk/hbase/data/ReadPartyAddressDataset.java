@@ -20,10 +20,27 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
+
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTablePool;
+
+import com.cloudera.cdk.data.PartitionKey;
+import com.cloudera.cdk.data.hbase.avro.SpecificAvroDao;
+import com.cloudera.cdk.data.hbase.impl.Dao;
+import com.cloudera.cdk.data.hbase.impl.EntityScanner;
+import com.cloudera.cdk.data.hbase.impl.SchemaManager;
+import com.cloudera.cdk.data.hbase.manager.DefaultSchemaManager;
+import com.cloudera.cdk.data.hbase.tool.SchemaTool;
+import com.cloudera.cdk.data.hbase.avro.AvroUtils;
 /**
  * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */
