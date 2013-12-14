@@ -35,35 +35,12 @@ public class PartyDatasetService {
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
     // Load the parties dataset
-    RandomAccessDataset<Party> parties = repo.load("parties");
+    RandomAccessDataset<Party> parties = repo.load("party");
 
     // Get an accessor for the dataset and look up a party by id
     Key key = new Key.Builder(parties).add("id", id).build();
     return parties.get(key);
 
-  }
-
-  public void list() throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-
-    // Load the parties dataset
-    RandomAccessDataset<Party> parties = repo.load("parties");
-
-    // Get a reader for the dataset and read all the users
-    DatasetReader<Party> reader = parties.newReader();
-        try {
-          reader.open();
-          for (Party party : reader) {
-            System.out.println(party);
-          }
-        } finally {
-          reader.close();
-        }
-   
-    //return 0;
   }
 
 }

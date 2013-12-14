@@ -25,9 +25,9 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * Read the party objects from the parties dataset by key lookup, and by scanning.
+ * Read the address objects from the addresses dataset by key lookup, and by scanning.
  */
-public class ReadPartyDataset extends Configured implements Tool {
+public class ReadAddressDataset extends Configured implements Tool {
 
   @Override
   public int run(String[] args) throws Exception {
@@ -36,21 +36,19 @@ public class ReadPartyDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the party dataset
-    RandomAccessDataset<Party> parties = repo.load("party");
+    // Load the address dataset
+    RandomAccessDataset<Address> addresses = repo.load("address");
 
-    // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties).add("id", "1").build();
-    Key key2 = new Key.Builder(parties).add("id", "9").build();
-    System.out.println(parties.get(key));
-    System.out.println(parties.get(key2));
-    
+    // Get an accessor for the dataset and look up a address by id
+    Key key = new Key.Builder(addresses).add("id", "1").build();
+    System.out.println(addresses.get(key));
+
     // Get a reader for the dataset and read all the users
-    DatasetReader<Party> reader = parties.newReader();
+    DatasetReader<Address> reader = addresses.newReader();
     try {
       reader.open();
-      for (Party party : reader) {
-        System.out.println(party);
+      for (Address address : reader) {
+        System.out.println(address);
       }
     } finally {
       reader.close();
@@ -60,7 +58,7 @@ public class ReadPartyDataset extends Configured implements Tool {
   }
 
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadPartyDataset(), args);
+    int rc = ToolRunner.run(new ReadAddressDataset(), args);
     System.exit(rc);
   }
 }

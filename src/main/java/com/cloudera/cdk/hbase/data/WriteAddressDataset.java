@@ -15,9 +15,8 @@
  */
 package com.cloudera.cdk.hbase.data;
 
-import com.cloudera.cdk.data.DatasetReader;
+import java.util.Date;
 import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import org.apache.hadoop.conf.Configured;
@@ -25,9 +24,9 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * Read the party objects from the parties dataset by key lookup, and by scanning.
+ * Write some address objects to the addresses dataset using Avro specific records.
  */
-public class ReadPartyDataset extends Configured implements Tool {
+public class WriteAddressDataset extends Configured implements Tool {
 
   @Override
   public int run(String[] args) throws Exception {
@@ -36,31 +35,35 @@ public class ReadPartyDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the party dataset
-    RandomAccessDataset<Party> parties = repo.load("party");
+    // Load the address dataset
+    RandomAccessDataset<Address> addresses = repo.load("address");
 
-    // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties).add("id", "1").build();
-    Key key2 = new Key.Builder(parties).add("id", "9").build();
-    System.out.println(parties.get(key));
-    System.out.println(parties.get(key2));
-    
-    // Get a reader for the dataset and read all the users
-    DatasetReader<Party> reader = parties.newReader();
-    try {
-      reader.open();
-      for (Party party : reader) {
-        System.out.println(party);
-      }
-    } finally {
-      reader.close();
-    }
+    // Get an accessor for the dataset and write some addresses to it
+    long x = System.currentTimeMillis();
+
+    addresses.put(address("1",x,x,"party1_address1","1"));
+    addresses.put(address("2",x,x,"party1_address2","2"));
+    addresses.put(address("3",x,x,"party1_address3","3"));
+    addresses.put(address("4",x,x,"party2_address1","4"));
+    addresses.put(address("5",x,x,"party2_address2","5"));
 
     return 0;
   }
 
+  private static Address address(String id, 
+                                  long startDttm, long endDttm, 
+                                   String addressRole, String eventId) {
+    return Address.newBuilder()
+        .setId(id)
+        .setStartDttm(startDttm)
+        .setEndDttm(endDttm)
+        .setAddressRole(addressRole)
+        .setEventId(eventId)
+        .build();
+  }
+
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadPartyDataset(), args);
+    int rc = ToolRunner.run(new WriteAddressDataset(), args);
     System.exit(rc);
   }
 }

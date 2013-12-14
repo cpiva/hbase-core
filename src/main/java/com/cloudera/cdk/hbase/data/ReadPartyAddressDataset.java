@@ -25,9 +25,9 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * Read the party objects from the parties dataset by key lookup, and by scanning.
+ * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */
-public class ReadPartyDataset extends Configured implements Tool {
+public class ReadPartyAddressDataset extends Configured implements Tool {
 
   @Override
   public int run(String[] args) throws Exception {
@@ -36,21 +36,23 @@ public class ReadPartyDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the party dataset
-    RandomAccessDataset<Party> parties = repo.load("party");
+    // Load the party_address dataset
+    RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
 
-    // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties).add("id", "1").build();
-    Key key2 = new Key.Builder(parties).add("id", "9").build();
-    System.out.println(parties.get(key));
-    System.out.println(parties.get(key2));
-    
+    // Get an accessor for the dataset and look up a partyAddress 
+    Key key = new Key.Builder(partyAddresses)
+        .add("party_id", "1")
+        .add("address_id", "1").build();
+
+    System.out.println(partyAddresses.get(key));
+
+
     // Get a reader for the dataset and read all the users
-    DatasetReader<Party> reader = parties.newReader();
+    DatasetReader<PartyAddress> reader = partyAddresses.newReader();
     try {
       reader.open();
-      for (Party party : reader) {
-        System.out.println(party);
+      for (PartyAddress partyAddress : reader) {
+        System.out.println(partyAddress);
       }
     } finally {
       reader.close();
@@ -60,7 +62,7 @@ public class ReadPartyDataset extends Configured implements Tool {
   }
 
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadPartyDataset(), args);
+    int rc = ToolRunner.run(new ReadPartyAddressDataset(), args);
     System.exit(rc);
   }
 }

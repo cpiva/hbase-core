@@ -19,9 +19,12 @@ mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WritePartyDataset"
 
 mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadPartyDataset"
 
+mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WriteAddressDataset"
+
+mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadAddressDataset"
+
 mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WriteEventDataset"
 
 mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadEventDataset"
-
 
  

@@ -20,26 +20,26 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.Event;
+import com.cloudera.cdk.hbase.data.Address;
 
 /**
- * Read the event objects from the events dataset by key lookup, and by scanning.
+ * Read the address objects from the addresses dataset by key lookup, and by scanning.
  */
 
-public class EventDatasetService {
+public class AddressDatasetService {
 
-  public Event get(String id) throws Exception {
+  public Address get(String id) throws Exception {
 
     // Construct an HBase dataset repository using the local HBase database
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the events dataset
-    RandomAccessDataset<Event> events = repo.load("event");
+    // Load the addresses dataset
+    RandomAccessDataset<Address> addresses = repo.load("address");
 
-    // Get an accessor for the dataset and look up a event by id
-    Key key = new Key.Builder(events).add("id", id).build();
-    return events.get(key);
+    // Get an accessor for the dataset and look up a address by id
+    Key key = new Key.Builder(addresses).add("id", id).build();
+    return addresses.get(key);
 
   }
 

@@ -36,8 +36,8 @@ public class ReadEventDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the events dataset
-    RandomAccessDataset<Event> events = repo.load("events");
+    // Load the event dataset
+    RandomAccessDataset<Event> events = repo.load("event");
 
     // Get an accessor for the dataset and look up a event by id
     Key key = new Key.Builder(events).add("id", "1").build();

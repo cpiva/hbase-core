@@ -35,8 +35,8 @@ public class WritePartyDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the parties dataset
-    RandomAccessDataset<Party> parties = repo.load("parties");
+    // Load the party dataset
+    RandomAccessDataset<Party> parties = repo.load("party");
 
     // Get an accessor for the dataset and write some parties to it
     long x = System.currentTimeMillis();

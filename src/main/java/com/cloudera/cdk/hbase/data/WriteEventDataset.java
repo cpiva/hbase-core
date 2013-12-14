@@ -35,8 +35,8 @@ public class WriteEventDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 
-    // Load the events dataset
-    RandomAccessDataset<Event> events = repo.load("events");
+    // Load the event dataset
+    RandomAccessDataset<Event> events = repo.load("event");
 
     // Get an accessor for the dataset and write some events to it
     long x = System.currentTimeMillis();
