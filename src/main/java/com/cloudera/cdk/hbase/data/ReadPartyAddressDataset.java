@@ -32,6 +32,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTablePool;
+import org.apache.log4j.Logger;
 
 import com.cloudera.cdk.data.PartitionKey;
 import com.cloudera.cdk.data.hbase.avro.SpecificAvroDao;
@@ -45,13 +46,21 @@ import com.cloudera.cdk.data.hbase.avro.AvroUtils;
  * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */
 public class ReadPartyAddressDataset extends Configured implements Tool {
+	Logger logger = Logger.getLogger(WriteAddressDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
+	  if (args.length < 1)
+	  {
+		  logger.error("Please pass the HBase repo URI in the form repo:hbase:zk1,zk2,zk3");
+		  throw new IllegalArgumentException("HBase URI is requred: repo:hbase:zk1,zk2,zk3");
+	  }
+	  else 
+		  logger.info("using hbase repo URI: " + args[0]);
+	  
+    // Construct an HBase dataset repository
     RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+        DatasetRepositories.openRandomAccess(args[0]);
 
     // Load the party_address dataset
     RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");

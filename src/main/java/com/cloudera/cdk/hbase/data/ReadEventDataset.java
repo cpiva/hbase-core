@@ -20,21 +20,31 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
+
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.log4j.Logger;
 
 /**
  * Read the event objects from the events dataset by key lookup, and by scanning.
  */
 public class ReadEventDataset extends Configured implements Tool {
+	Logger logger = Logger.getLogger(WriteAddressDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
+	  if (args.length < 1)
+	  {
+		  logger.error("Please pass the HBase repo URI in the form repo:hbase:zk1,zk2,zk3");
+		  throw new IllegalArgumentException("HBase URI is requred: repo:hbase:zk1,zk2,zk3");
+	  }
+	  else 
+		  logger.info("using hbase repo URI: " + args[0]);
+	  
+    // Construct an HBase dataset repository
     RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+        DatasetRepositories.openRandomAccess(args[0]);
 
     // Load the event dataset
     RandomAccessDataset<Event> events = repo.load("event");
