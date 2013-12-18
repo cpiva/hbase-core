@@ -30,7 +30,7 @@
   <properties>
     <!-- Keep this updated to the latest CDK release! -->
     <cdk-version>0.9.1-SNAPSHOT</cdk-version>
-    <cdh.version>cdh4.5.0</cdh.version>    
+    <cdh-version>cdh4.5.0</cdh-version>    
   </properties>
 
   <build>
@@ -105,7 +105,7 @@
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase</artifactId>
-      <version>0.94.6-${cdh.version}</version>
+      <version>0.94.6-${cdh-version}</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
@@ -116,12 +116,12 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-client</artifactId>
-      <version>2.0.0-${cdh.version}</version>
+      <version>2.0.0-${cdh-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.hcatalog</groupId>
       <artifactId>hcatalog-core</artifactId>
-      <version>0.5.0-${cdh.version}</version>
+      <version>0.5.0-${cdh-version}</version>
     </dependency>
   </dependencies>
 
