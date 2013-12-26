@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Agreement",
-  "namespace": "com.cloudera.cdk.hbase.data",
+  "namespace": "com.cloudera.cdk.hbase.data.avro",
   "doc": "agreement record",
   "fields": [
     {

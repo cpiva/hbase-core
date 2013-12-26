@@ -23,7 +23,7 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.PartyAgreement;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**

@@ -2,4 +2,5 @@
 .*
 !.gitignore
 \#*#
+src/main/java/com/cloudera/cdk/hbase/data/avro
 target

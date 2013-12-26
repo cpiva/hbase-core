@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "PartyAgreement",
-  "namespace": "com.cloudera.cdk.hbase.data",
+  "namespace": "com.cloudera.cdk.hbase.data.avro",
   "doc": "party agreement index",
   "fields": [
     { "name": "party_id", "type": "string", "mapping":

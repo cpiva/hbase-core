@@ -15,16 +15,17 @@
  */
 package com.cloudera.cdk.hbase.data;
 
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+import org.apache.log4j.Logger;
+
 import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-
-import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.util.Tool;
-import org.apache.hadoop.util.ToolRunner;
-import org.apache.log4j.Logger;
+import com.cloudera.cdk.hbase.data.avro.Party;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.

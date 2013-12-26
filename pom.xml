@@ -40,11 +40,6 @@
         <groupId>org.apache.avro</groupId>
         <artifactId>avro-maven-plugin</artifactId>
         <version>1.7.5</version>
-        <configuration>
-          <!-- <stringType>String</stringType> -->
-          <createSetters>false</createSetters>
-          <fieldVisibility>private</fieldVisibility>
-        </configuration>
         <executions>
           <execution>
             <phase>generate-sources</phase>
@@ -53,12 +48,18 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <createSetters>false</createSetters>
+          <fieldVisibility>private</fieldVisibility>
+          <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+          <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>          
+        </configuration>        
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>3.1</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
@@ -79,6 +80,39 @@
           </configuration>-->
       </plugin>
     </plugins>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>org.apache.avro</groupId>
+    								<artifactId>
+    									avro-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[1.7.5,)
+    								</versionRange>
+    								<goals>
+    									<goal>schema</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 
   <dependencies>

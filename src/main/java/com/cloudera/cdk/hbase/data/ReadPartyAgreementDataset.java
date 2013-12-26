@@ -25,6 +25,7 @@ import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 /**
  * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */

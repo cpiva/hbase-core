@@ -15,16 +15,15 @@
  */
 package com.cloudera.cdk.hbase.data;
 
-import java.util.Date;
-
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.Logger;
+
+import com.cloudera.cdk.data.DatasetRepositories;
+import com.cloudera.cdk.data.RandomAccessDataset;
+import com.cloudera.cdk.data.RandomAccessDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.Party;
 
 /**
  * Write some party objects to the parties dataset using Avro specific records.

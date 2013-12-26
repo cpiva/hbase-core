@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 
 /**
  * Write some partyAgreement objects to the partyAgreement dataset using Avro specific records.
