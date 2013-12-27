@@ -28,4 +28,8 @@ mvn cdk:delete-dataset \
 
 mvn cdk:delete-dataset \
   -Dcdk.repositoryUri=$1 \
+  -Dcdk.datasetName=agreement \
+
+mvn cdk:delete-dataset \
+  -Dcdk.repositoryUri=$1 \
   -Dcdk.datasetName=party_agreement \
