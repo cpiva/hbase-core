@@ -29,3 +29,8 @@ mvn cdk:create-dataset \
   -Dcdk.repositoryUri=$1 \
   -Dcdk.datasetName=party_address \
   -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc  
+
+mvn cdk:create-dataset \
+  -Dcdk.repositoryUri=$1 \
+  -Dcdk.datasetName=party_agreement \
+  -Dcdk.avroSchemaFile=src/main/avro/party_agreement.avsc    
