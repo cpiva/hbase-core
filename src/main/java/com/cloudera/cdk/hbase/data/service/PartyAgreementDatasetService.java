@@ -15,8 +15,11 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
@@ -31,15 +34,23 @@ import com.cloudera.cdk.hbase.data.util.PropertiesManager;
  */
 
 public class PartyAgreementDatasetService {
+	static Logger logger = Logger.getLogger(PartyAgreementDatasetService.class);
+	
+	static RandomAccessDatasetRepository repo = null;
+	static RandomAccessDataset<PartyAgreement> partyAgreements = null;
+	
+    // Construct an HBase dataset repository
+	static {
+		try {
+			repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
+		    // Load the dataset
+			partyAgreements = repo.load("party_agreement");			
+		} catch (IOException e) {
+			logger.error("failed to initialize hbase repo, check hbase.url property", e);
+		}
+	}
 
   public PartyAgreement get(String party_id, String agreement_id) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-
-    // Load the parties dataset
-    RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 
     // Get an accessor for the dataset and look up a party by id
     Key key = new Key.Builder(partyAgreements)
@@ -53,13 +64,6 @@ public class PartyAgreementDatasetService {
 
   public List<PartyAgreement>  scan(String partyId) throws Exception {
     List<PartyAgreement> ls=new ArrayList<PartyAgreement>(); 
-
-    // Construct an HBase dataset repository using the local HBase database
-    //RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-    RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
-    
-    // Load the party_address dataset
-    RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 
     // Get a reader for the dataset and read all the users
     DatasetReader<PartyAgreement> reader = partyAgreements.newReader();

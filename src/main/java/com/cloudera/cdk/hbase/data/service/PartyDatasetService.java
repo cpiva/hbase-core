@@ -15,6 +15,8 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
+import org.apache.log4j.Logger;
+
 import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
@@ -27,6 +29,8 @@ import com.cloudera.cdk.hbase.data.util.PropertiesManager;
  */
 
 public class PartyDatasetService {
+	
+	Logger logger = Logger.getLogger(PartyDatasetService.class);
 
   public Party get(String id) throws Exception {
       

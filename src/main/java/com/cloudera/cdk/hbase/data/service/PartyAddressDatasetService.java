@@ -15,8 +15,11 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.cloudera.cdk.data.DatasetReader;
 import com.cloudera.cdk.data.DatasetRepositories;
@@ -31,15 +34,23 @@ import com.cloudera.cdk.hbase.data.util.PropertiesManager;
  */
 
 public class PartyAddressDatasetService {
+	static Logger logger = Logger.getLogger(PartyAddressDatasetService.class);
+	
+	static RandomAccessDatasetRepository repo = null;
+	static RandomAccessDataset<PartyAddress> partyAddresses;
+	
+    // Construct an HBase dataset repository
+	static {
+		try {
+			repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
+		    // Load the parties dataset
+		    partyAddresses = repo.load("party_address");			
+		} catch (IOException e) {
+			logger.error("failed to initialize hbase repo, check hbase.url property", e);
+		}
+	}
 
   public PartyAddress get(String party_id, String address_id) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
-    //RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-    RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
-
-    // Load the parties dataset
-    RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
 
     // Get an accessor for the dataset and look up a party by id
     Key key = new Key.Builder(partyAddresses)
@@ -54,12 +65,8 @@ public class PartyAddressDatasetService {
   public List<PartyAddress>  scan(String partyId) throws Exception {
     List<PartyAddress> ls=new ArrayList<PartyAddress>(); 
 
-    // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
-
     // Load the party_address dataset
-    RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
+    //RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
 
     // Get a reader for the dataset and read all the users
     DatasetReader<PartyAddress> reader = partyAddresses.newReader();

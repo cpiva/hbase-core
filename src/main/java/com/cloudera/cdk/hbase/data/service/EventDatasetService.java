@@ -31,7 +31,6 @@ public class EventDatasetService {
   public Event get(String id) throws Exception {
 
     // Construct an HBase dataset repository using the local HBase database
-	//RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
 	RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
 
     // Load the events dataset
