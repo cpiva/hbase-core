@@ -15,31 +15,23 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.Agreement;
-import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
- * Read the agreement objects from the agreements dataset by key lookup, and by scanning.
+ * Read the agreement objects from the agreements dataset by key lookup, and by
+ * scanning.
  */
+public class AgreementDatasetService extends AbstractHBaseService {
+	public Agreement get(String id) throws Exception {
+		// Load the addresses dataset
+		RandomAccessDataset<Agreement> agreements = repo.load("agreement");
 
-public class AgreementDatasetService {
+		// Get an accessor for the dataset and look up a address by id
+		Key key = new Key.Builder(agreements).add("id", id).build();
+		return agreements.get(key);
 
-  public Agreement get(String id) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
-	RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
-
-    // Load the addresses dataset
-    RandomAccessDataset<Agreement> agreements = repo.load("agreement");
-
-    // Get an accessor for the dataset and look up a address by id
-    Key key = new Key.Builder(agreements).add("id", id).build();
-    return agreements.get(key);
-
-  }
+	}
 
 }

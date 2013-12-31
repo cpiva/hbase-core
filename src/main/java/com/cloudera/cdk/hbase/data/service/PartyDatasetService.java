@@ -15,35 +15,25 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import org.apache.log4j.Logger;
-
-import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.Party;
-import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
- * Read the party objects from the parties dataset by key lookup, and by scanning.
+ * Read the party objects from the parties dataset by key lookup, and by
+ * scanning.
  */
+public class PartyDatasetService extends AbstractHBaseService {
 
-public class PartyDatasetService {
-	
-	Logger logger = Logger.getLogger(PartyDatasetService.class);
+	public Party get(String id) throws Exception {
+		
+		// Load the parties dataset
+		RandomAccessDataset<Party> parties = repo.load("party");
 
-  public Party get(String id) throws Exception {
-      
-    // Construct an HBase dataset repository using the local HBase database
-	RandomAccessDatasetRepository repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
+		// Get an accessor for the dataset and look up a party by id
+		Key key = new Key.Builder(parties).add("id", id).build();
+		return parties.get(key);
 
-    // Load the parties dataset
-    RandomAccessDataset<Party> parties = repo.load("party");
-
-    // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(parties).add("id", id).build();
-    return parties.get(key);
-
-  }
+	}
 
 }

@@ -15,40 +15,27 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
-import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
  */
 
-public class PartyAgreementDatasetService {
-	static Logger logger = Logger.getLogger(PartyAgreementDatasetService.class);
+public class PartyAgreementDatasetService extends AbstractHBaseService {
 	
-	static RandomAccessDatasetRepository repo = null;
-	static RandomAccessDataset<PartyAgreement> partyAgreements = null;
+	RandomAccessDataset<PartyAgreement> partyAgreements = null;
 	
-    // Construct an HBase dataset repository
-	static {
-		try {
-			repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
-		    // Load the dataset
-			partyAgreements = repo.load("party_agreement");			
-		} catch (IOException e) {
-			logger.error("failed to initialize hbase repo, check hbase.url property", e);
-		}
-	}
+	public PartyAgreementDatasetService(String repoUrl) {
+		super(repoUrl);
+	    // Load the dataset
+		partyAgreements = repo.load("party_agreement");					
+	}	
 
   public PartyAgreement get(String party_id, String agreement_id) throws Exception {
 

@@ -15,40 +15,28 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
 import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.PartyAddress;
-import com.cloudera.cdk.hbase.data.util.PropertiesManager;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
  */
 
-public class PartyAddressDatasetService {
-	static Logger logger = Logger.getLogger(PartyAddressDatasetService.class);
+public class PartyAddressDatasetService extends AbstractHBaseService {
+
+	RandomAccessDataset<PartyAddress> partyAddresses;
 	
-	static RandomAccessDatasetRepository repo = null;
-	static RandomAccessDataset<PartyAddress> partyAddresses;
-	
-    // Construct an HBase dataset repository
-	static {
-		try {
-			repo = DatasetRepositories.openRandomAccess(PropertiesManager.getProperty("hbase.url"));
-		    // Load the parties dataset
-		    partyAddresses = repo.load("party_address");			
-		} catch (IOException e) {
-			logger.error("failed to initialize hbase repo, check hbase.url property", e);
-		}
+	public PartyAddressDatasetService(String repoUrl) {
+		super(repoUrl);
+	    // Load the parties dataset
+	    partyAddresses = repo.load("party_address");					
 	}
+
 
   public PartyAddress get(String party_id, String address_id) throws Exception {
 
