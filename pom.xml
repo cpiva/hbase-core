@@ -34,7 +34,6 @@
   </properties>
 
   <build>
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>                
@@ -43,7 +42,6 @@
                 </includes>
             </resource>
         </resources>        
-
     <plugins>
       <!-- Compile Avro schemas -->
       <plugin>
@@ -65,17 +63,13 @@
           <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>          
         </configuration>        
       </plugin>
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-              <descriptors>
-                <descriptor>${basedir}/src/main/resources/driver.xml</descriptor>
-              </descriptors>				
-			<!--  		<descriptorRefs>
+			  		<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>-->
+					</descriptorRefs>
 					<appendAssemblyId>true</appendAssemblyId>
 					<finalName>hbase-core</finalName>
 				</configuration>
@@ -89,7 +83,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
