@@ -66,5 +66,7 @@ public class PartyAgreementDatasetService extends AbstractHBaseService {
     }
     return ls;
   }
-
+  //private boolean isPartyIdEqual(PartyAgreement partyAgreement, String partyId) {
+	//  return partyAgreement.getPartyId().toString().startsWith(partyId);
+  //}
 }

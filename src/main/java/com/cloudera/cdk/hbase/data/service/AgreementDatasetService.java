@@ -28,7 +28,7 @@ public class AgreementDatasetService extends AbstractHBaseService {
 		// Load the addresses dataset
 		RandomAccessDataset<Agreement> agreements = repo.load("agreement");
 
-		// Get an accessor for the dataset and look up a address by id
+		// Get an accessor for the dataset and look up a agreement by id
 		Key key = new Key.Builder(agreements).add("id", id).build();
 		return agreements.get(key);
 
