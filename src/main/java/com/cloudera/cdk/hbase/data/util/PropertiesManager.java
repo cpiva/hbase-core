@@ -19,6 +19,7 @@ public class PropertiesManager {
 			p.load(is);
 			value = p.getProperty(propertyKey);
 			log.info("Successfully loaded property value " + value);
+			System.out.println("Successfully loaded property value: " + value);
 		}
 		return value;
 	}		
