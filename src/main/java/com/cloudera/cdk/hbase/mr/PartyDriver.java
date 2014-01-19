@@ -19,6 +19,11 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Logger;
 
+import com.cloudera.cdk.data.RandomAccessDataset;
+import com.cloudera.cdk.data.hbase.HBaseDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.Party;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
+
 public class PartyDriver {
 	
 public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
@@ -48,14 +53,15 @@ public static void main(String[] args) throws IOException, InterruptedException,
 		static NullWritable nullWritable = NullWritable.get();
 		
 		private Configuration conf = null;
-		private HTablePool tablePool = null;
+		//private HTablePool tablePool = null;
+		private HBaseDatasetRepository repo = null;
 
 		@Override
 		protected void cleanup(Context context) throws IOException,
 				InterruptedException {
 			super.cleanup(context);
-			if (tablePool != null)
-				tablePool.close();
+			//if (tablePool != null)
+			//	tablePool.close();
 		}
 
 		@Override
@@ -63,7 +69,8 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				InterruptedException {
 			super.setup(context);
 			conf = HBaseConfiguration.create();
-			tablePool = new HTablePool(conf, 5);
+			//tablePool = new HTablePool(conf, 5);
+			repo = new HBaseDatasetRepository.Builder().configuration(conf).build();			
 		}
 		
 		@Override
@@ -75,12 +82,19 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			String id = vals[0].trim();
 			String desc = vals[1].trim();
 			String type = vals[2].trim();
-			Long startDttm = vals[3].trim().isEmpty() ? null : Long.parseLong(vals[3].trim());
-			Long endDttm = vals[4].trim().isEmpty() ? null : Long.parseLong(vals[4].trim());
+			Long startDttm = vals[3].trim().isEmpty() ? 0L : Long.parseLong(vals[3].trim());
+			Long endDttm = vals[4].trim().isEmpty() ? 0L : Long.parseLong(vals[4].trim());
 			String statusCode = vals[5].trim();
 			String languageCode = vals[6].trim();
 			String eventId = vals[7].trim();
 
+			RandomAccessDataset<Party> table = null;
+			try {
+			 table = repo.load("party");
+			 Party party = instantiateParty(id, desc, type, startDttm, endDttm, statusCode, languageCode, eventId);
+			 table.put(party);
+
+			/*
 			HTableInterface table = null;
 			try {
 				table = tablePool.getTable("party");
@@ -110,16 +124,35 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				}
 				
 				table.put(put);
+				*/
 			} catch (Exception e) {
 				System.out.println("HBase exception message: " + e.getMessage());
 				e.printStackTrace(System.out);
 			} finally {
-				if (table != null) {
-					table.close();
-				}
+				//if (table != null) {
+				//	table.close();
+				//}
 			}
 		    
 			context.write(nullWritable, nullWritable);
-		}		
+		}
+		
+		private static Party instantiateParty(
+				           String id, String desc, String type, 
+				                   long startDttm, long endDttm, 
+				                   String statusCode, 
+				                   String languageCode, String eventId) {
+				         return Party.newBuilder()
+				             .setId(id)
+				             .setDesc(desc)
+				             .setType(type)
+				             .setStartDttm(startDttm)
+				             .setEndDttm(endDttm)
+				             .setStatusCode(statusCode)
+				             .setLanguageCode(languageCode)
+				             .setEventId(eventId)
+				             .build();
+		}
+		
 	 }
 }

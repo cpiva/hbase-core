@@ -19,6 +19,11 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Logger;
 
+import com.cloudera.cdk.data.RandomAccessDataset;
+import com.cloudera.cdk.data.hbase.HBaseDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.Agreement;
+import com.cloudera.cdk.hbase.data.avro.Party;
+
 public class AgreementDriver {
 	
 public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
@@ -48,14 +53,15 @@ public static void main(String[] args) throws IOException, InterruptedException,
 		static NullWritable nullWritable = NullWritable.get();
 		
 		private Configuration conf = null;
-		private HTablePool tablePool = null;
-
+		//private HTablePool tablePool = null;
+		private HBaseDatasetRepository repo = null;
+		
 		@Override
 		protected void cleanup(Context context) throws IOException,
 				InterruptedException {
 			super.cleanup(context);
-			if (tablePool != null)
-				tablePool.close();
+			//if (tablePool != null)
+			//	tablePool.close();
 		}
 
 		@Override
@@ -63,7 +69,8 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				InterruptedException {
 			super.setup(context);
 			conf = HBaseConfiguration.create();
-			tablePool = new HTablePool(conf, 5);
+			//tablePool = new HTablePool(conf, 5);
+			repo = new HBaseDatasetRepository.Builder().configuration(conf).build();						
 		}
 		
 		@Override
@@ -84,6 +91,13 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			//String statusCode = vals[9].trim();
 			String eventId = vals[9].trim();
 
+			RandomAccessDataset<Agreement> table = null;
+			try {
+			 table = repo.load("agreement");
+			 Agreement agreement = instantiateAgreement(id, desc, lobCode, reasonCode, description, startDttm, endDttm, typeCode, currencyCode, eventId);
+			 table.put(agreement);
+			
+			/*
 			HTableInterface table = null;
 			try {
 				table = tablePool.getTable("agreement");
@@ -119,16 +133,34 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				}
 				
 				table.put(put);
+				*/
 			} catch (Exception e) {
 				System.out.println("HBase exception message: " + e.getMessage());
 				e.printStackTrace(System.out);
 			} finally {
-				if (table != null) {
-					table.close();
-				}
+				//if (table != null) {
+				//	table.close();
+				//}
 			}
 		    
 			context.write(nullWritable, nullWritable);
+		}
+		
+		private static Agreement instantiateAgreement(
+				String id, String desc, String lobCode, String reasonCode, String description,
+				long startDttm, long endDttm, String typeCode, String currencyCode, String eventId) {
+			return Agreement.newBuilder()
+		             .setId(id)
+		             .setDesc(desc)
+		             .setLobCode(lobCode)
+		             .setReasonCode(reasonCode)
+		             .setDescription(description)
+		             .setStartDttm(startDttm)
+		             .setEndDttm(endDttm)
+		             .setTypeCode(typeCode)
+		             .setCurrencyCode(currencyCode)
+		             .setEventId(eventId)
+		             .build();
 		}
 		
 	 }

@@ -19,6 +19,10 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Logger;
 
+import com.cloudera.cdk.data.RandomAccessDataset;
+import com.cloudera.cdk.data.hbase.HBaseDatasetRepository;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
+
 public class PartyAgreementDriver {
 	
 public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
@@ -48,14 +52,15 @@ public static void main(String[] args) throws IOException, InterruptedException,
 		static NullWritable nullWritable = NullWritable.get();
 		
 		private Configuration conf = null;
-		private HTablePool tablePool = null;
+		//private HTablePool tablePool = null;
+		private HBaseDatasetRepository repo = null;
 
 		@Override
 		protected void cleanup(Context context) throws IOException,
 				InterruptedException {
 			super.cleanup(context);
-			if (tablePool != null)
-				tablePool.close();
+			//if (tablePool != null)
+			//	tablePool.close();
 		}
 
 		@Override
@@ -63,7 +68,8 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				InterruptedException {
 			super.setup(context);
 			conf = HBaseConfiguration.create();
-			tablePool = new HTablePool(conf, 5);
+			repo = new HBaseDatasetRepository.Builder().configuration(conf).build();
+			//tablePool = new HTablePool(conf, 5);
 		}
 		
 		@Override
@@ -77,15 +83,21 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			String role = vals[2].trim();
 			String valu = vals[3].trim();
 
+			RandomAccessDataset<PartyAgreement> table = null;
+			try {
+			 table = repo.load("party_agreement");
+			 PartyAgreement partyAgreement = instantiatePartyAgreement(partyId, agreementId, role, valu);
+			 table.put(partyAgreement);
+			/*
 			HTableInterface table = null;
 			try {
 				table = tablePool.getTable("party_agreement");
 				Put put = new Put(Bytes.toBytes(getKey(partyId, agreementId)));
 				
-				//put.add(Bytes.toBytes("cf"), Bytes.toBytes("id"), Bytes.toBytes(id));
-				//if (!agreementId.isEmpty()) {
-				//	put.add(Bytes.toBytes("_s"), Bytes.toBytes("agreement_id"), Bytes.toBytes(agreementId));
-				//}
+				put.add(Bytes.toBytes("cf"), Bytes.toBytes("id"), Bytes.toBytes(id));
+				if (!agreementId.isEmpty()) {
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("agreement_id"), Bytes.toBytes(agreementId));
+				}
 				if (!role.isEmpty()) {
 					put.add(Bytes.toBytes("_s"), Bytes.toBytes("role"), Bytes.toBytes(role));
 				}
@@ -94,13 +106,14 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				}
 				
 				table.put(put);
+				*/
 			} catch (Exception e) {
 				System.out.println("HBase exception message: " + e.getMessage());
 				e.printStackTrace(System.out);
 			} finally {
-				if (table != null) {
-					table.close();
-				}
+				//if (table != null) {
+				//	table.close();
+				//}
 			}
 		    
 			context.write(nullWritable, nullWritable);
@@ -112,5 +125,16 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			sb.append(agreementId);
 			return sb.toString();
 		}
+
+		private static PartyAgreement instantiatePartyAgreement(
+				           String partyId, String agreementId, String role, String value) {
+				         return PartyAgreement.newBuilder()
+				             .setPartyId(partyId)
+				             .setAgreementId(agreementId)
+				             .setRole(role)
+				             .setValue(value)
+				             .build();
+		}
+
 	 }
 }
