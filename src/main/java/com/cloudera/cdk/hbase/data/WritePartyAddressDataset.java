@@ -49,9 +49,6 @@ public class WritePartyAddressDataset extends Configured implements Tool {
     // Load the party_address dataset
     RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
 
-    // Get an accessor for the dataset and write some partyAddresses to it
-    long x = System.currentTimeMillis();
-
     partyAddresses.put(partyAddress("1", "1","1"));
     partyAddresses.put(partyAddress("1", "2","2"));
     partyAddresses.put(partyAddress("3", "4","4"));

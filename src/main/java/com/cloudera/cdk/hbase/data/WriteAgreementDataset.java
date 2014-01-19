@@ -75,14 +75,10 @@ public class WriteAgreementDataset extends Configured implements Tool {
         .setEndDttm(endDttm)
         .setDesc(desc)
         .setReasonCode(reasonCode)
-        .setReasonText(reasonText)
         .setDescription(description)
-        .setTypeDesc(typeDesc)
+        .setTypeCode(typeDesc)
         .setCurrencyCode(currencyCode)
-        .setCurrencyDesc(currencyDesc)
-        .setStatusCode(statusCode)
-        .setLobCategory(lobCategory)
-        .setLobName(lobName)
+        .setLobCode(lobCategory)
         .setEventId(eventId)
         .build();
   }

@@ -49,20 +49,22 @@ public class WritePartyAgreementDataset extends Configured implements Tool {
     // Load the party_address dataset
     RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 
-    partyAgreements.put(partyAgreement("1", "1","1"));
-    partyAgreements.put(partyAgreement("1", "2","2"));
-    partyAgreements.put(partyAgreement("3", "4","4"));
-    partyAgreements.put(partyAgreement("3", "5","5"));
+    partyAgreements.put(partyAgreement("1", "1","contract", "1"));
+    partyAgreements.put(partyAgreement("1", "2","contract","2"));
+    partyAgreements.put(partyAgreement("3", "4","contract", "4"));
+    partyAgreements.put(partyAgreement("3", "5", "contract", "5"));
 
     return 0;
   }
 
   private static PartyAgreement partyAgreement(String partyId, 
                                                String agreementId,
+                                               String role,
                                                String value) {
     return PartyAgreement.newBuilder()
         .setPartyId(partyId)
-        .setAgreementId(agreementId)
+        //.setAgreementId(agreementId)
+        .setRole(role)
         .setValue(value)
         .build();
   }

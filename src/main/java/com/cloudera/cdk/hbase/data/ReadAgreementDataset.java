@@ -31,7 +31,7 @@ import com.cloudera.cdk.hbase.data.avro.Agreement;
  * Read the agreement objects from the agreements dataset by key lookup, and by scanning.
  */
 public class ReadAgreementDataset extends Configured implements Tool {
-	private static Logger logger = Logger.getLogger(WriteAddressDataset.class);
+	private static Logger logger = Logger.getLogger(ReadAgreementDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {

@@ -30,7 +30,7 @@ import com.cloudera.cdk.hbase.data.avro.Party;
  */
 public class WritePartyDataset extends Configured implements Tool {
 
-	Logger logger = Logger.getLogger(WriteAddressDataset.class);
+	Logger logger = Logger.getLogger(WritePartyDataset.class);
 	
   @Override
   public int run(String[] args) throws Exception {
@@ -73,7 +73,6 @@ public class WritePartyDataset extends Configured implements Tool {
         .setStartDttm(startDttm)
         .setEndDttm(endDttm)
         .setStatusCode(statusCode)
-        .setStatusDesc(statusDesc)
         .setLanguageCode(languageCode)
         .setEventId(eventId)
         .build();
