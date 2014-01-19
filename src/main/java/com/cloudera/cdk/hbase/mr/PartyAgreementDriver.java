@@ -80,17 +80,17 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			HTableInterface table = null;
 			try {
 				table = tablePool.getTable("party_agreement");
-				Put put = new Put(Bytes.toBytes(partyId));
+				Put put = new Put(Bytes.toBytes(getKey(partyId, agreementId)));
 				
 				//put.add(Bytes.toBytes("cf"), Bytes.toBytes("id"), Bytes.toBytes(id));
-				if (!agreementId.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("agreement_id"), Bytes.toBytes(agreementId));
-				}
+				//if (!agreementId.isEmpty()) {
+				//	put.add(Bytes.toBytes("_s"), Bytes.toBytes("agreement_id"), Bytes.toBytes(agreementId));
+				//}
 				if (!role.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("role"), Bytes.toBytes(agreementId));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("role"), Bytes.toBytes(role));
 				}
 				if (!valu.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("value"), Bytes.toBytes(valu));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("value"), Bytes.toBytes(valu));
 				}
 				
 				table.put(put);
@@ -104,6 +104,13 @@ public static void main(String[] args) throws IOException, InterruptedException,
 			}
 		    
 			context.write(nullWritable, nullWritable);
-		}		
+		}	
+		
+		private String getKey(String partyId, String agreementId) {
+			StringBuilder sb = new StringBuilder(partyId);
+			sb.append("_");
+			sb.append(agreementId);
+			return sb.toString();
+		}
 	 }
 }

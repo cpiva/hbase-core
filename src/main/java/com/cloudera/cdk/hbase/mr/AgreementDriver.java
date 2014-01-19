@@ -91,31 +91,31 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				
 				//put.add(Bytes.toBytes("cf"), Bytes.toBytes("id"), Bytes.toBytes(id));
 				if (!desc.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("desc"), Bytes.toBytes(desc));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("desc"), Bytes.toBytes(desc));
 				}
 				if (!lobCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("lob_code"), Bytes.toBytes(lobCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("lob_code"), Bytes.toBytes(lobCode));
 				}
 				if (!reasonCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("reason_code"), Bytes.toBytes(reasonCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("reason_code"), Bytes.toBytes(reasonCode));
 				}
 				if (!description.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("description"), Bytes.toBytes(description));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("description"), Bytes.toBytes(description));
 				}
 				if (startDttm != null) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("start_dttm"), Bytes.toBytes(startDttm.longValue()));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("start_dttm"), Bytes.toBytes(startDttm.longValue()));
 				}
 				if (endDttm != null) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("end_dttm"), Bytes.toBytes(endDttm.longValue()));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("end_dttm"), Bytes.toBytes(endDttm.longValue()));
 				}
 				if (!typeCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("type_code"), Bytes.toBytes(typeCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("type_code"), Bytes.toBytes(typeCode));
 				}
 				if (!currencyCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("currency_code"), Bytes.toBytes(currencyCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("currency_code"), Bytes.toBytes(currencyCode));
 				}
 				if (!eventId.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("event_id"), Bytes.toBytes(eventId));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("event_id"), Bytes.toBytes(eventId));
 				}
 				
 				table.put(put);

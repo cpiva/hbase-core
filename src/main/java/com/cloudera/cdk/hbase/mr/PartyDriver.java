@@ -88,25 +88,25 @@ public static void main(String[] args) throws IOException, InterruptedException,
 				
 				//put.add(Bytes.toBytes("cf"), Bytes.toBytes("id"), Bytes.toBytes(id));
 				if (!desc.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("desc"), Bytes.toBytes(desc));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("desc"), Bytes.toBytes(desc));
 				}
 				if (!type.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("type"), Bytes.toBytes(type));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("type"), Bytes.toBytes(type));
 				}
 				if (startDttm != null) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("start_dttm"), Bytes.toBytes(startDttm.longValue()));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("start_dttm"), Bytes.toBytes(startDttm.longValue()));
 				}
 				if (endDttm != null) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("end_dttm"), Bytes.toBytes(endDttm.longValue()));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("end_dttm"), Bytes.toBytes(endDttm.longValue()));
 				}
 				if (!statusCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("status_code"), Bytes.toBytes(statusCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("status_code"), Bytes.toBytes(statusCode));
 				}
 				if (!languageCode.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("language_code"), Bytes.toBytes(languageCode));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("language_code"), Bytes.toBytes(languageCode));
 				}
 				if (!eventId.isEmpty()) {
-					put.add(Bytes.toBytes("cf"), Bytes.toBytes("event_id"), Bytes.toBytes(eventId));
+					put.add(Bytes.toBytes("_s"), Bytes.toBytes("event_id"), Bytes.toBytes(eventId));
 				}
 				
 				table.put(put);
