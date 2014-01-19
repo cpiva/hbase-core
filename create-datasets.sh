@@ -15,20 +15,20 @@ mvn cdk:create-dataset \
   -Dcdk.datasetName=party \
   -Dcdk.avroSchemaFile=src/main/avro/party.avsc
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=event \
-  -Dcdk.avroSchemaFile=src/main/avro/event.avsc
+#mvn cdk:create-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=event \
+#  -Dcdk.avroSchemaFile=src/main/avro/event.avsc
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=address \
-  -Dcdk.avroSchemaFile=src/main/avro/address.avsc
+#mvn cdk:create-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=address \
+#  -Dcdk.avroSchemaFile=src/main/avro/address.avsc
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party_address \
-  -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc  
+#mvn cdk:create-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=party_address \
+#  -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc  
 
 mvn cdk:create-dataset \
   -Dcdk.repositoryUri=$1 \

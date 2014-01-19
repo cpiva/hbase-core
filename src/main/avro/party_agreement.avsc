@@ -11,9 +11,14 @@
       { "type": "key", "value": "1" }
     },
     {
+      "name": "role",
+      "type": "string",
+      "mapping": { "type": "column", "value": "_s:role" }
+    },   
+    {
       "name": "value",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:value" }
+      "mapping": { "type": "column", "value": "_s:value" }
     }   
   ]
 }

@@ -12,67 +12,47 @@
     {
       "name": "start_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "meta:start_dttm" }
+      "mapping": { "type": "column", "value": "_s:start_dttm" }
     },
     {
       "name": "end_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "meta:end_dttm" }
+      "mapping": { "type": "column", "value": "_s:end_dttm" }
     },
     {
       "name": "desc",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:desc" }
+      "mapping": { "type": "column", "value": "_s:desc" }
     },
     {
       "name": "reason_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:reason_code" }
-    },
-    {
-      "name": "reason_text",
-      "type": "string",
-      "mapping": { "type": "column", "value": "meta:reason_text" }
+      "mapping": { "type": "column", "value": "_s:reason_code" }
     },
     {
       "name": "description",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:description" }
+      "mapping": { "type": "column", "value": "_s:description" }
     },
     {
-      "name": "type_desc",
+      "name": "type_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:type_desc" }
+      "mapping": { "type": "column", "value": "_s:type_code" }
     },
     {
       "name": "currency_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:currency_code" }
+      "mapping": { "type": "column", "value": "_s:currency_code" }
     },
     {
-      "name": "currency_desc",
+      "name": "lob_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:currency_desc" }
-    },
-    {
-      "name": "status_code",
-      "type": "string",
-      "mapping": { "type": "column", "value": "meta:status_code" }
-    },
-    {
-      "name": "lob_category",
-      "type": "string",
-      "mapping": { "type": "column", "value": "meta:lob_category" }
-    },
-    {
-      "name": "lob_name",
-      "type": "string",
-      "mapping": { "type": "column", "value": "meta:lob_name" }
+      "mapping": { "type": "column", "value": "_s:lob_code" }
     },
     {
       "name": "event_id",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:event_id" }
+      "mapping": { "type": "column", "value": "_s:event_id" }
     }
   ]
 }

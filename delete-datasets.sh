@@ -14,17 +14,17 @@ mvn cdk:delete-dataset \
   -Dcdk.repositoryUri=$1 \
   -Dcdk.datasetName=party
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=event \
+#mvn cdk:delete-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=event \
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=address \
+#mvn cdk:delete-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=address \
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party_address \
+#mvn cdk:delete-dataset \
+#  -Dcdk.repositoryUri=$1 \
+#  -Dcdk.datasetName=party_address \
 
 mvn cdk:delete-dataset \
   -Dcdk.repositoryUri=$1 \
