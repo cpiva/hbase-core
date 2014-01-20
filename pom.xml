@@ -34,14 +34,22 @@
   </properties>
 
   <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>                
-                <includes>
-                    <include>log4j.properties</include>
-                </includes>
-            </resource>
-        </resources>        
+    <resources>
+        <!-- add avro schema to classpath -->
+        <resource>
+            <directory>src/main/avro</directory>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>                
+        </resource>    
+        <!-- copy hadoop and hive configuration from host -->
+        <resource>
+            <directory>/etc/hive/conf</directory>                
+        </resource>    
+        <resource>
+            <directory>/etc/hadoop/conf</directory>                
+        </resource>    
+    </resources>        
     <plugins>
       <!-- Compile Avro schemas -->
       <plugin>
