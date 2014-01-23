@@ -1,9 +1,9 @@
 package com.cloudera.cdk.hbase.data.service;
 
 import org.apache.log4j.Logger;
+import org.kitesdk.data.DatasetRepositories;
+import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 
 public abstract class AbstractHBaseService {
 

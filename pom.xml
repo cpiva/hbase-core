@@ -20,16 +20,16 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.cloudera.cdk.hbase</groupId>
+  <groupId>com.cloudera.kite.hbase</groupId>
   <artifactId>hbase-core</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.10.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>CDK Dataset HBase Examples</name>
+  <name>Kite/CDK Dataset HBase Examples</name>
 
   <properties>
-    <!-- Keep this updated to the latest CDK release! -->
-    <cdk-version>0.9.1-SNAPSHOT</cdk-version>
+    <!-- Keep this updated to the latest Kite release! -->
+    <kite-version>0.10.1</kite-version>
     <cdh-version>cdh4.5.0</cdh-version>    
   </properties>
 
@@ -105,28 +105,23 @@
       </plugin>
 
       <plugin>
-        <groupId>com.cloudera.cdk</groupId>
-        <artifactId>cdk-maven-plugin</artifactId>
-        <version>${cdk-version}</version>
-          <!--<configuration>
-	    <repositoryUri>repo:hbase:localhost.localdomain</repositoryUri>
-            <datasetName>parties</datasetName>
-            <avroSchemaFile>src/main/avro/party.avsc</avroSchemaFile>
-          </configuration>-->
+        <groupId>org.kitesdk</groupId>
+        <artifactId>kite-maven-plugin</artifactId>
+        <version>${kite-version}</version>
       </plugin>
     </plugins>
   </build>
 
   <dependencies>
     <dependency>
-      <groupId>com.cloudera.cdk</groupId>
-      <artifactId>cdk-data-core</artifactId>
-      <version>${cdk-version}</version>
+      <groupId>org.kitesdk</groupId>
+      <artifactId>kite-data-core</artifactId>
+      <version>${kite-version}</version>
     </dependency>
     <dependency>
-      <groupId>com.cloudera.cdk</groupId>
-      <artifactId>cdk-data-hbase</artifactId>
-      <version>${cdk-version}</version>
+      <groupId>org.kitesdk</groupId>
+      <artifactId>kite-data-hbase</artifactId>
+      <version>${kite-version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

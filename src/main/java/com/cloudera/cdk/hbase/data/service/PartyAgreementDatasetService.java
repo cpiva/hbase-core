@@ -18,9 +18,10 @@ package com.cloudera.cdk.hbase.data.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
+import org.kitesdk.data.DatasetReader;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+
 import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 
 /**

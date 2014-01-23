@@ -10,32 +10,17 @@ fi
 
 echo "using repositoryUri: $1"
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party \
-  -Dcdk.avroSchemaFile=src/main/avro/party.avsc
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party \
+  -Dkite.avroSchemaFile=src/main/avro/party.avsc
 
-#mvn cdk:create-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=event \
-#  -Dcdk.avroSchemaFile=src/main/avro/event.avsc
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=agreement \
+  -Dkite.avroSchemaFile=src/main/avro/agreement.avsc    
 
-#mvn cdk:create-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=address \
-#  -Dcdk.avroSchemaFile=src/main/avro/address.avsc
-
-#mvn cdk:create-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=party_address \
-#  -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc  
-
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=agreement \
-  -Dcdk.avroSchemaFile=src/main/avro/agreement.avsc    
-
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party_agreement \
-  -Dcdk.avroSchemaFile=src/main/avro/party_agreement.avsc    
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party_agreement \
+  -Dkite.avroSchemaFile=src/main/avro/party_agreement.avsc    

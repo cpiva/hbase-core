@@ -14,9 +14,9 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Logger;
+import org.kitesdk.data.RandomAccessDataset;
+import org.kitesdk.data.hbase.HBaseDatasetRepository;
 
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.hbase.HBaseDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.Agreement;
 
 public class AgreementDriver {

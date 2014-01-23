@@ -19,12 +19,12 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.Logger;
+import org.kitesdk.data.DatasetReader;
+import org.kitesdk.data.DatasetRepositories;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 import com.cloudera.cdk.hbase.data.avro.Agreement;
 
 /**

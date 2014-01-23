@@ -15,8 +15,9 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+
 import com.cloudera.cdk.hbase.data.avro.Party;
 
 /**

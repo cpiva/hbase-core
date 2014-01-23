@@ -10,26 +10,14 @@ fi
 
 echo "using repositoryUri: $1"
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party
 
-#mvn cdk:delete-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=event \
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=agreement \
 
-#mvn cdk:delete-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=address \
-
-#mvn cdk:delete-dataset \
-#  -Dcdk.repositoryUri=$1 \
-#  -Dcdk.datasetName=party_address \
-
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=agreement \
-
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=$1 \
-  -Dcdk.datasetName=party_agreement \
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party_agreement \
