@@ -137,7 +137,6 @@
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase</artifactId>
       <version>0.94.6-${cdh-version}</version>
-      <scope>runtime</scope>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
