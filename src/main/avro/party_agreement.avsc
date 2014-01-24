@@ -13,12 +13,12 @@
     {
       "name": "role",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:role" }
+      "mapping": { "type": "column", "value": "f:role" }
     },   
     {
       "name": "value",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:value" }
+      "mapping": { "type": "column", "value": "f:value" }
     }   
   ]
 }

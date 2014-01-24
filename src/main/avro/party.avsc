@@ -12,37 +12,37 @@
     {
       "name": "desc",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:desc" }
+      "mapping": { "type": "column", "value": "f:desc" }
     },
     {
       "name": "type",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:type" }
+      "mapping": { "type": "column", "value": "f:type" }
     },
     {
       "name": "start_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "_s:start_dttm" }
+      "mapping": { "type": "column", "value": "f:start_dttm" }
     },
     {
       "name": "end_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "_s:end_dttm" }
+      "mapping": { "type": "column", "value": "f:end_dttm" }
     },
     {
       "name": "status_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:status_code" }
+      "mapping": { "type": "column", "value": "f:status_code" }
     },
     {
       "name": "language_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:language_code" }
+      "mapping": { "type": "column", "value": "f:language_code" }
     },
     {
       "name": "event_id",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:event_id" }
+      "mapping": { "type": "column", "value": "f:event_id" }
     }
   ]
 }

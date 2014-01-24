@@ -12,47 +12,47 @@
     {
       "name": "start_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "_s:start_dttm" }
+      "mapping": { "type": "column", "value": "f:start_dttm" }
     },
     {
       "name": "end_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "_s:end_dttm" }
+      "mapping": { "type": "column", "value": "f:end_dttm" }
     },
     {
       "name": "desc",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:desc" }
+      "mapping": { "type": "column", "value": "f:desc" }
     },
     {
       "name": "reason_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:reason_code" }
+      "mapping": { "type": "column", "value": "f:reason_code" }
     },
     {
       "name": "description",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:description" }
+      "mapping": { "type": "column", "value": "f:description" }
     },
     {
       "name": "type_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:type_code" }
+      "mapping": { "type": "column", "value": "f:type_code" }
     },
     {
       "name": "currency_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:currency_code" }
+      "mapping": { "type": "column", "value": "f:currency_code" }
     },
     {
       "name": "lob_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:lob_code" }
+      "mapping": { "type": "column", "value": "f:lob_code" }
     },
     {
       "name": "event_id",
       "type": "string",
-      "mapping": { "type": "column", "value": "_s:event_id" }
+      "mapping": { "type": "column", "value": "f:event_id" }
     }
   ]
 }
