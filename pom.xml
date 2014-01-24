@@ -25,7 +25,7 @@
   <version>0.10.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Kite/CDK Dataset HBase Examples</name>
+  <name>Kite Dataset HBase Examples</name>
 
   <properties>
     <!-- Keep this updated to the latest Kite release! -->
@@ -137,6 +137,7 @@
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase</artifactId>
       <version>0.94.6-${cdh-version}</version>
+      <scope>provided</scope>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
