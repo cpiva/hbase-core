@@ -30,7 +30,8 @@
   <properties>
     <!-- Keep this updated to the latest Kite release! -->
     <kite-version>0.10.1</kite-version>
-    <cdh-version>cdh4.5.0</cdh-version>    
+    <cdh-version>cdh4.5.0</cdh-version>
+    <avro-version>1.7.5</avro-version>
   </properties>
 
   <build>
@@ -55,7 +56,7 @@
       <plugin>
         <groupId>org.apache.avro</groupId>
         <artifactId>avro-maven-plugin</artifactId>
-        <version>1.7.5</version>
+        <version>${avro-version}</version>
         <executions>
           <execution>
             <phase>generate-sources</phase>
@@ -131,7 +132,7 @@
     <dependency>
       <groupId>org.apache.avro</groupId>
       <artifactId>avro</artifactId>
-      <version>1.7.5</version>
+      <version>${avro-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.hbase</groupId>
@@ -168,4 +169,22 @@
     </repository>
   </repositories>
 
+  <pluginRepositories>
+      <pluginRepository>
+          <id>cdh.repo</id>
+          <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
+          <name>Cloudera Repositories</name>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>          
+      </pluginRepository>
+      <pluginRepository>
+          <id>spring-milestones</id>
+          <name>Spring Milestones</name>
+          <url>http://repo.spring.io/libs-milestone</url>
+          <snapshots>
+              <enabled>true</enabled>
+          </snapshots>
+      </pluginRepository>    
+  </pluginRepositories>
 </project>
