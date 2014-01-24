@@ -20,4 +20,8 @@ mvn -e kite:delete-dataset \
 
 mvn -e kite:delete-dataset \
   -Dkite.repositoryUri=$1 \
-  -Dkite.datasetName=party_agreement \
+ -Dkite.datasetName=party_agreement \
+
+echo "disable 'party';drop 'party'" | hbase shell
+echo "disable 'agreement';drop 'agreement'" | hbase shell
+echo "disable 'party_agreement';drop 'party_agreement'" | hbase shell
