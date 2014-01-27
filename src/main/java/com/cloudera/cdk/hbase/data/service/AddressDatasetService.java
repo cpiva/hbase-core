@@ -15,32 +15,26 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.Address;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+
+import com.cloudera.cdk.hbase.data.avro.Address;
 
 /**
- * Read the address objects from the addresses dataset by key lookup, and by scanning.
+ * Read the address objects from the addresses dataset by key lookup, and by
+ * scanning.
  */
 
-public class AddressDatasetService {
+public class AddressDatasetService extends AbstractHBaseService {
 
-  public Address get(String id) throws Exception {
+	public Address get(String id) throws Exception {
+		// Load the addresses dataset
+		RandomAccessDataset<Address> addresses = repo.load("address");
 
-    // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+		// Get an accessor for the dataset and look up a address by id
+		Key key = new Key.Builder(addresses).add("id", id).build();
+		return addresses.get(key);
 
-    // Load the addresses dataset
-    RandomAccessDataset<Address> addresses = repo.load("address");
-
-    // Get an accessor for the dataset and look up a address by id
-    Key key = new Key.Builder(addresses).add("id", id).build();
-    return addresses.get(key);
-
-  }
+	}
 
 }

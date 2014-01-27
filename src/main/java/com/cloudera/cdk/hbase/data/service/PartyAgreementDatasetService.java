@@ -22,48 +22,44 @@ import org.kitesdk.data.DatasetReader;
 import org.kitesdk.data.Key;
 import org.kitesdk.data.RandomAccessDataset;
 
-import com.cloudera.cdk.hbase.data.avro.PartyAddress;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 
 /**
  * Read the party objects from the parties dataset by key lookup, and by scanning.
  */
 
-public class PartyAddressDatasetService extends AbstractHBaseService {
-
-	RandomAccessDataset<PartyAddress> partyAddresses;
+public class PartyAgreementDatasetService extends AbstractHBaseService {
 	
-	public PartyAddressDatasetService(String repoUrl) {
+	RandomAccessDataset<PartyAgreement> partyAgreements = null;
+	
+	public PartyAgreementDatasetService(String repoUrl) {
 		super(repoUrl);
-	    // Load the parties dataset
-	    partyAddresses = repo.load("party_address");					
-	}
+	    // Load the dataset
+		partyAgreements = repo.load("party_agreement");					
+	}	
 
-
-  public PartyAddress get(String party_id, String address_id) throws Exception {
+  public PartyAgreement get(String party_id, String agreement_id) throws Exception {
 
     // Get an accessor for the dataset and look up a party by id
-    Key key = new Key.Builder(partyAddresses)
+    Key key = new Key.Builder(partyAgreements)
                     .add("party_id", party_id)
-                    .add("address_id", address_id)
+                    .add("agreement_id", agreement_id)
                     .build();
                     
-    return partyAddresses.get(key);
+    return partyAgreements.get(key);
 
   }
 
-  public List<PartyAddress>  scan(String partyId) throws Exception {
-    List<PartyAddress> ls=new ArrayList<PartyAddress>(); 
-
-    // Load the party_address dataset
-    //RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");
+  public List<PartyAgreement>  scan(String partyId) throws Exception {
+    List<PartyAgreement> ls=new ArrayList<PartyAgreement>(); 
 
     // Get a reader for the dataset and read all the users
-    DatasetReader<PartyAddress> reader = partyAddresses.newReader();
+    DatasetReader<PartyAgreement> reader = partyAgreements.newReader();
     try {
       reader.open();
-      for (PartyAddress partyAddress : reader) {
-        if(partyAddress.getPartyId().toString().equals(partyId)){
-          ls.add(partyAddress);
+      for (PartyAgreement partyAgreement : reader) {
+        if(partyAgreement.getPartyId().toString().equals(partyId)){
+          ls.add(partyAgreement);
         }
       }
     } finally {
@@ -71,5 +67,7 @@ public class PartyAddressDatasetService extends AbstractHBaseService {
     }
     return ls;
   }
-
+  //private boolean isPartyIdEqual(PartyAgreement partyAgreement, String partyId) {
+	//  return partyAgreement.getPartyId().toString().startsWith(partyId);
+  //}
 }

@@ -25,13 +25,12 @@ import org.kitesdk.data.Key;
 import org.kitesdk.data.RandomAccessDataset;
 import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import com.cloudera.cdk.hbase.data.avro.Event;
-
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 /**
- * Read the event objects from the events dataset by key lookup, and by scanning.
+ * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */
-public class ReadEventDataset extends Configured implements Tool {
-	Logger logger = Logger.getLogger(WriteAddressDataset.class);
+public class ReadPartyAgreementDataset extends Configured implements Tool {
+	private static Logger logger = Logger.getLogger(WriteAddressDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {
@@ -47,19 +46,23 @@ public class ReadEventDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess(args[0]);
 
-    // Load the event dataset
-    RandomAccessDataset<Event> events = repo.load("event");
+    // Load the party_address dataset
+    RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 
-    // Get an accessor for the dataset and look up a event by id
-    Key key = new Key.Builder(events).add("id", "1").build();
-    System.out.println(events.get(key));
+    // Get an accessor for the dataset and look up a partyAddress 
+    Key key = new Key.Builder(partyAgreements)
+        .add("party_id", "1")
+        .add("agreement_id", "1").build();
+
+    System.out.println(partyAgreements.get(key));
+
 
     // Get a reader for the dataset and read all the users
-    DatasetReader<Event> reader = events.newReader();
+    DatasetReader<PartyAgreement> reader = partyAgreements.newReader();
     try {
       reader.open();
-      for (Event event : reader) {
-        System.out.println(event);
+      for (PartyAgreement partyAgreement : reader) {
+        System.out.println(partyAgreement);
       }
     } finally {
       reader.close();
@@ -69,7 +72,7 @@ public class ReadEventDataset extends Configured implements Tool {
   }
 
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadEventDataset(), args);
+    int rc = ToolRunner.run(new ReadPartyAgreementDataset(), args);
     System.exit(rc);
   }
 }

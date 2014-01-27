@@ -15,43 +15,36 @@
  */
 package com.cloudera.cdk.hbase.data;
 
-import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.log4j.Logger;
+import org.kitesdk.data.DatasetReader;
+import org.kitesdk.data.DatasetRepositories;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.client.HTablePool;
-
-import com.cloudera.cdk.data.PartitionKey;
-import com.cloudera.cdk.data.hbase.avro.SpecificAvroDao;
-import com.cloudera.cdk.data.hbase.impl.Dao;
-import com.cloudera.cdk.data.hbase.impl.EntityScanner;
-import com.cloudera.cdk.data.hbase.impl.SchemaManager;
-import com.cloudera.cdk.data.hbase.manager.DefaultSchemaManager;
-import com.cloudera.cdk.data.hbase.tool.SchemaTool;
-import com.cloudera.cdk.data.hbase.avro.AvroUtils;
+import com.cloudera.cdk.hbase.data.avro.PartyAddress;
 /**
  * Read the partyAddress objects from the party_addresses dataset by key lookup, and by scanning.
  */
 public class ReadPartyAddressDataset extends Configured implements Tool {
+	Logger logger = Logger.getLogger(WriteAddressDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {
-
-    // Construct an HBase dataset repository using the local HBase database
+	  if (args.length < 1)
+	  {
+		  logger.error("Please pass the HBase repo URI in the form repo:hbase:zk1,zk2,zk3");
+		  throw new IllegalArgumentException("HBase URI is requred: repo:hbase:zk1,zk2,zk3");
+	  }
+	  else 
+		  logger.info("using hbase repo URI: " + args[0]);
+	  
+    // Construct an HBase dataset repository
     RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+        DatasetRepositories.openRandomAccess(args[0]);
 
     // Load the party_address dataset
     RandomAccessDataset<PartyAddress> partyAddresses = repo.load("party_address");

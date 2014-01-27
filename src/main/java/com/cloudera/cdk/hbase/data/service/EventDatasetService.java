@@ -15,32 +15,26 @@
  */
 package com.cloudera.cdk.hbase.data.service;
 
-import com.cloudera.cdk.data.DatasetReader;
-import com.cloudera.cdk.data.DatasetRepositories;
-import com.cloudera.cdk.data.Key;
-import com.cloudera.cdk.data.RandomAccessDataset;
-import com.cloudera.cdk.data.RandomAccessDatasetRepository;
-import com.cloudera.cdk.hbase.data.Event;
+import org.kitesdk.data.Key;
+import org.kitesdk.data.RandomAccessDataset;
+
+import com.cloudera.cdk.hbase.data.avro.Event;
 
 /**
- * Read the event objects from the events dataset by key lookup, and by scanning.
+ * Read the event objects from the events dataset by key lookup, and by
+ * scanning.
  */
 
-public class EventDatasetService {
+public class EventDatasetService extends AbstractHBaseService {
 
-  public Event get(String id) throws Exception {
+	public Event get(String id) throws Exception {
+		// Load the events dataset
+		RandomAccessDataset<Event> events = repo.load("event");
 
-    // Construct an HBase dataset repository using the local HBase database
-    RandomAccessDatasetRepository repo =
-        DatasetRepositories.openRandomAccess("repo:hbase:localhost.localdomain");
+		// Get an accessor for the dataset and look up a event by id
+		Key key = new Key.Builder(events).add("id", id).build();
+		return events.get(key);
 
-    // Load the events dataset
-    RandomAccessDataset<Event> events = repo.load("event");
-
-    // Get an accessor for the dataset and look up a event by id
-    Key key = new Key.Builder(events).add("id", id).build();
-    return events.get(key);
-
-  }
+	}
 
 }

@@ -19,22 +19,21 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.Logger;
-import org.kitesdk.data.DatasetReader;
 import org.kitesdk.data.DatasetRepositories;
-import org.kitesdk.data.Key;
 import org.kitesdk.data.RandomAccessDataset;
 import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import com.cloudera.cdk.hbase.data.avro.Event;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 
 /**
- * Read the event objects from the events dataset by key lookup, and by scanning.
+ * Write some partyAgreement objects to the partyAgreement dataset using Avro specific records.
  */
-public class ReadEventDataset extends Configured implements Tool {
-	Logger logger = Logger.getLogger(WriteAddressDataset.class);
-
+public class WritePartyAgreementDataset extends Configured implements Tool {
+	private static Logger logger = Logger.getLogger(WritePartyAgreementDataset.class);
+	
   @Override
   public int run(String[] args) throws Exception {
+
 	  if (args.length < 1)
 	  {
 		  logger.error("Please pass the HBase repo URI in the form repo:hbase:zk1,zk2,zk3");
@@ -47,29 +46,31 @@ public class ReadEventDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess(args[0]);
 
-    // Load the event dataset
-    RandomAccessDataset<Event> events = repo.load("event");
+    // Load the party_address dataset
+    RandomAccessDataset<PartyAgreement> partyAgreements = repo.load("party_agreement");
 
-    // Get an accessor for the dataset and look up a event by id
-    Key key = new Key.Builder(events).add("id", "1").build();
-    System.out.println(events.get(key));
-
-    // Get a reader for the dataset and read all the users
-    DatasetReader<Event> reader = events.newReader();
-    try {
-      reader.open();
-      for (Event event : reader) {
-        System.out.println(event);
-      }
-    } finally {
-      reader.close();
-    }
+    partyAgreements.put(partyAgreement("1", "1","contract", "1"));
+    partyAgreements.put(partyAgreement("1", "2","contract","2"));
+    partyAgreements.put(partyAgreement("3", "4","contract", "4"));
+    partyAgreements.put(partyAgreement("3", "5", "contract", "5"));
 
     return 0;
   }
 
+  private static PartyAgreement partyAgreement(String partyId, 
+                                               String agreementId,
+                                               String role,
+                                               String value) {
+    return PartyAgreement.newBuilder()
+        .setPartyId(partyId)
+        //.setAgreementId(agreementId)
+        .setRole(role)
+        .setValue(value)
+        .build();
+  }
+
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadEventDataset(), args);
+    int rc = ToolRunner.run(new WritePartyAgreementDataset(), args);
     System.exit(rc);
   }
 }

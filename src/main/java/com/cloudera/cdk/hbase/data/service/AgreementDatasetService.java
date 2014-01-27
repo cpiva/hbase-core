@@ -18,22 +18,20 @@ package com.cloudera.cdk.hbase.data.service;
 import org.kitesdk.data.Key;
 import org.kitesdk.data.RandomAccessDataset;
 
-import com.cloudera.cdk.hbase.data.avro.Party;
+import com.cloudera.cdk.hbase.data.avro.Agreement;
 
 /**
- * Read the party objects from the parties dataset by key lookup, and by
+ * Read the agreement objects from the agreements dataset by key lookup, and by
  * scanning.
  */
-public class PartyDatasetService extends AbstractHBaseService {
+public class AgreementDatasetService extends AbstractHBaseService {
+	public Agreement get(String id) throws Exception {
+		// Load the addresses dataset
+		RandomAccessDataset<Agreement> agreements = repo.load("agreement");
 
-	public Party get(String id) throws Exception {
-		
-		// Load the parties dataset
-		RandomAccessDataset<Party> parties = repo.load("party");
-
-		// Get an accessor for the dataset and look up a party by id
-		Key key = new Key.Builder(parties).add("id", id).build();
-		return parties.get(key);
+		// Get an accessor for the dataset and look up a agreement by id
+		Key key = new Key.Builder(agreements).add("id", id).build();
+		return agreements.get(key);
 
 	}
 

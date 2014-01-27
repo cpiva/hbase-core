@@ -1,30 +1,26 @@
 hbase-core
 ==========
 
-clone, compile and install the Cloudera CDK using:
+This project depends on Kite (https://github.com/kite-sdk/kite).
 
-git clone https://github.com/cloudera/cdk.git
+Prerequisties
+-------------
+- Hadoop client package from CDH
+- HBase package from CDH
 
-mvn install -Dmaven.test.skip=true
-
-then on hbase-core run the following:
+Getting Started
+---------------
+In hbase-core run the following:
 
 mvn compile -Dmaven.test.skip=true
 
-sh delete-dataset.sh (optional)
+Delete existing hbase tables and metadata (only needed if you change avro schemas):
+```delete-datasets.sh```
 
-sh create-dataset.sh
+Create new datasets via Kite
+```./create-datasets.sh```
 
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WritePartyDataset"
+Run MapReduce jobs, sample scripts are provided in *-mr.sh:
+``` ./party-mr.sh```
 
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadPartyDataset"
-
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WriteAddressDataset"
-
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadAddressDataset"
-
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.WriteEventDataset"
-
-mvn exec:java -Dexec.mainClass="com.cloudera.cdk.hbase.data.ReadEventDataset"
-
- 
+The HBase tables should be populated at this point.

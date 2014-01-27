@@ -1,19 +1,27 @@
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=party \
-  -Dcdk.avroSchemaFile=src/main/avro/party.avsc
+#!/bin/bash
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=event \
-  -Dcdk.avroSchemaFile=src/main/avro/event.avsc
+if [ $# -ne 1 ]; then
+  echo "usage: $0 <hbase repositoryUri>"
+  echo "e.g.:"
+  echo "  $0 repo:hbase:zk"
+  echo "  $0 repo:hbase:zk1,zk2,zk3"  
+  exit 1
+fi
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=address \
-  -Dcdk.avroSchemaFile=src/main/avro/address.avsc
+echo "using repositoryUri: $1"
 
-mvn cdk:delete-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=party_address \
-  -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc    
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party
+
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=agreement
+
+mvn -e kite:delete-dataset \
+  -Dkite.repositoryUri=$1 \
+ -Dkite.datasetName=party_agreement
+
+echo "disable 'party';drop 'party'" | hbase shell
+echo "disable 'agreement';drop 'agreement'" | hbase shell
+echo "disable 'party_agreement';drop 'party_agreement'" | hbase shell

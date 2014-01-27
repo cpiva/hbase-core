@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Event",
-  "namespace": "com.cloudera.cdk.hbase.data",
+  "namespace": "com.cloudera.cdk.hbase.data.avro",
   "doc": "event record",
   "fields": [
     {

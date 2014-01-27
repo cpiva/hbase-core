@@ -1,19 +1,26 @@
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=party \
-  -Dcdk.avroSchemaFile=src/main/avro/party.avsc
+#!/bin/bash
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=event \
-  -Dcdk.avroSchemaFile=src/main/avro/event.avsc
+if [ $# -ne 1 ]; then
+  echo "usage: $0 <hbase repositoryUri>"
+  echo "e.g.:"
+  echo "  $0 repo:hbase:zk"
+  echo "  $0 repo:hbase:zk1,zk2,zk3"  
+  exit 1
+fi
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=address \
-  -Dcdk.avroSchemaFile=src/main/avro/address.avsc
+echo "using repositoryUri: $1"
 
-mvn cdk:create-dataset \
-  -Dcdk.repositoryUri=repo:hbase:localhost.localdomain \
-  -Dcdk.datasetName=party_address \
-  -Dcdk.avroSchemaFile=src/main/avro/party_address.avsc  
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party \
+  -Dkite.avroSchemaFile=src/main/avro/party.avsc
+
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=agreement \
+  -Dkite.avroSchemaFile=src/main/avro/agreement.avsc    
+
+mvn kite:create-dataset \
+  -Dkite.repositoryUri=$1 \
+  -Dkite.datasetName=party_agreement \
+  -Dkite.avroSchemaFile=src/main/avro/party_agreement.avsc    

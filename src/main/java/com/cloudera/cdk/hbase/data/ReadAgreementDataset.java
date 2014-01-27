@@ -25,13 +25,13 @@ import org.kitesdk.data.Key;
 import org.kitesdk.data.RandomAccessDataset;
 import org.kitesdk.data.RandomAccessDatasetRepository;
 
-import com.cloudera.cdk.hbase.data.avro.Event;
+import com.cloudera.cdk.hbase.data.avro.Agreement;
 
 /**
- * Read the event objects from the events dataset by key lookup, and by scanning.
+ * Read the agreement objects from the agreements dataset by key lookup, and by scanning.
  */
-public class ReadEventDataset extends Configured implements Tool {
-	Logger logger = Logger.getLogger(WriteAddressDataset.class);
+public class ReadAgreementDataset extends Configured implements Tool {
+	private static Logger logger = Logger.getLogger(ReadAgreementDataset.class);
 
   @Override
   public int run(String[] args) throws Exception {
@@ -47,19 +47,19 @@ public class ReadEventDataset extends Configured implements Tool {
     RandomAccessDatasetRepository repo =
         DatasetRepositories.openRandomAccess(args[0]);
 
-    // Load the event dataset
-    RandomAccessDataset<Event> events = repo.load("event");
+    // Load the address dataset
+    RandomAccessDataset<Agreement> agreements = repo.load("agreement");
 
-    // Get an accessor for the dataset and look up a event by id
-    Key key = new Key.Builder(events).add("id", "1").build();
-    System.out.println(events.get(key));
+    // Get an accessor for the dataset and look up a address by id
+    Key key = new Key.Builder(agreements).add("id", "1").build();
+    System.out.println(agreements.get(key));
 
     // Get a reader for the dataset and read all the users
-    DatasetReader<Event> reader = events.newReader();
+    DatasetReader<Agreement> reader = agreements.newReader();
     try {
       reader.open();
-      for (Event event : reader) {
-        System.out.println(event);
+      for (Agreement agreement : reader) {
+        System.out.println(agreement);
       }
     } finally {
       reader.close();
@@ -69,7 +69,7 @@ public class ReadEventDataset extends Configured implements Tool {
   }
 
   public static void main(String... args) throws Exception {
-    int rc = ToolRunner.run(new ReadEventDataset(), args);
+    int rc = ToolRunner.run(new ReadAgreementDataset(), args);
     System.exit(rc);
   }
 }

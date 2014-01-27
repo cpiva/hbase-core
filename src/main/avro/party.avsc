@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Party",
-  "namespace": "com.cloudera.cdk.hbase.data",
+  "namespace": "com.cloudera.cdk.hbase.data.avro",
   "doc": "party record",
   "fields": [
     {
@@ -12,42 +12,37 @@
     {
       "name": "desc",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:desc" }
+      "mapping": { "type": "column", "value": "f:desc" }
     },
     {
       "name": "type",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:type" }
+      "mapping": { "type": "column", "value": "f:type" }
     },
     {
       "name": "start_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "meta:start_dttm" }
+      "mapping": { "type": "column", "value": "f:start_dttm" }
     },
     {
       "name": "end_dttm",
       "type": "long",
-      "mapping": { "type": "column", "value": "meta:end_dttm" }
+      "mapping": { "type": "column", "value": "f:end_dttm" }
     },
     {
       "name": "status_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:status_code" }
-    },
-    {
-      "name": "status_desc",
-      "type": "string",
-      "mapping": { "type": "column", "value": "meta:status_desc" }
+      "mapping": { "type": "column", "value": "f:status_code" }
     },
     {
       "name": "language_code",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:language_code" }
+      "mapping": { "type": "column", "value": "f:language_code" }
     },
     {
       "name": "event_id",
       "type": "string",
-      "mapping": { "type": "column", "value": "meta:event_id" }
+      "mapping": { "type": "column", "value": "f:event_id" }
     }
   ]
 }
